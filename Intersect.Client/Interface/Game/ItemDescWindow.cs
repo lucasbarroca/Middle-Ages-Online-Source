@@ -1,4 +1,5 @@
-﻿using Intersect.Client.Core;
+﻿using System;
+using Intersect.Client.Core;
 using Intersect.Client.Framework.File_Management;
 using Intersect.Client.Framework.Gwen;
 using Intersect.Client.Framework.Gwen.Control;
@@ -110,6 +111,8 @@ namespace Intersect.Client.Interface.Game
                 var stats = "";
                 if (item.ItemType == ItemTypes.Equipment)
                 {
+                    bool comparingStats = true;
+
                     stats = Strings.ItemDesc.bonuses;
                     itemStats.AddText(
                         stats, itemStats.RenderColor,
@@ -176,6 +179,21 @@ namespace Intersect.Client.Interface.Game
                                 }
 
                                 bonus += item.PercentageStatsGiven[i] + "%";
+                            }
+
+                            var comparingStat = Globals.Me.Stat[i];
+                            var currentEquippedItem = Globals.Me.Equipment[item.EquipmentSlot];
+                            if (comparingStats && flatStat != comparingStat)
+                            {
+                                var difference = Math.Abs(flatStat - comparingStat);
+                                if (flatStat > comparingStat)
+                                {
+                                    bonus += "(+ ";
+                                } else
+                                {
+                                    bonus += "(- ";
+                                }
+                                bonus += difference.ToString() + ")";
                             }
 
                             stats = Strings.ItemDesc.stats[i].ToString(bonus);
