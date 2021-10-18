@@ -24,6 +24,8 @@ using Intersect.Utilities;
 using Intersect.Client.Items;
 using Intersect.Client.Interface.Game.Chat;
 using Intersect.Config.Guilds;
+using Intersect.Client.Framework.Entities;
+using Intersect.Client.Interface.Game.DescriptionWindows;
 
 namespace Intersect.Client.Entities
 {
@@ -52,6 +54,8 @@ namespace Intersect.Client.Entities
         private Entity mLastBumpedEvent = null;
 
         private List<PartyMember> mParty;
+
+        private Entity mLastBumpedEvent = null;
 
         public Dictionary<Guid, QuestProgress> QuestProgress = new Dictionary<Guid, QuestProgress>();
 
@@ -1708,11 +1712,6 @@ namespace Intersect.Client.Entities
 
             TargetIndex = Guid.Empty;
             TargetType = -1;
-            if (mItemTargetBox != null)
-            {
-                mItemTargetBox.Dispose();
-                mItemTargetBox = null;
-            }
         }
 
         /// <summary>
