@@ -2050,6 +2050,10 @@ namespace Intersect.Server.Entities
             if (success)
             {
                 StartCommonEventsWithTrigger(CommonEventTrigger.InventoryChanged);
+                if (CraftingTableId != Guid.Empty) // Update our crafting table if we have one
+                {
+                    PacketSender.SendOpenCraftingTable(this, CraftingTableBase.Get(this.CraftingTableId), true);
+                }
 
                 return true;
             }
@@ -2281,6 +2285,10 @@ namespace Intersect.Server.Entities
             PacketSender.SendInventoryItemUpdate(this, slotIndex);
 
             StartCommonEventsWithTrigger(CommonEventTrigger.InventoryChanged);
+            if (CraftingTableId != Guid.Empty) // Update our crafting table if we have one
+            {
+                PacketSender.SendOpenCraftingTable(this, CraftingTableBase.Get(this.CraftingTableId), true);
+            }
 
             return true;
         }
