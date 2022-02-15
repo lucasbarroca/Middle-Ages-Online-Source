@@ -33,6 +33,9 @@ namespace Intersect.Editor.Forms.Editors
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmItem));
             this.grpItems = new DarkUI.Controls.DarkGroupBox();
             this.btnClearSearch = new DarkUI.Controls.DarkButton();
@@ -107,6 +110,29 @@ namespace Intersect.Editor.Forms.Editors
             this.txtName = new DarkUI.Controls.DarkTextBox();
             this.grpEquipment = new DarkUI.Controls.DarkGroupBox();
             this.grpJewelLeveling = new DarkUI.Controls.DarkGroupBox();
+            this.expGrid = new System.Windows.Forms.DataGridView();
+            this.grpExpGrid = new DarkUI.Controls.DarkGroupBox();
+            this.btnResetExpGrid = new DarkUI.Controls.DarkButton();
+            this.btnCloseExpGrid = new DarkUI.Controls.DarkButton();
+            this.darkGroupBox1 = new DarkUI.Controls.DarkGroupBox();
+            this.darkNumericUpDown1 = new DarkUI.Controls.DarkNumericUpDown();
+            this.darkNumericUpDown2 = new DarkUI.Controls.DarkNumericUpDown();
+            this.nudPointsIncrease = new DarkUI.Controls.DarkNumericUpDown();
+            this.darkNumericUpDown3 = new DarkUI.Controls.DarkNumericUpDown();
+            this.darkNumericUpDown4 = new DarkUI.Controls.DarkNumericUpDown();
+            this.darkNumericUpDown5 = new DarkUI.Controls.DarkNumericUpDown();
+            this.darkNumericUpDown6 = new DarkUI.Controls.DarkNumericUpDown();
+            this.darkNumericUpDown7 = new DarkUI.Controls.DarkNumericUpDown();
+            this.darkRadioButton1 = new DarkUI.Controls.DarkRadioButton();
+            this.darkRadioButton2 = new DarkUI.Controls.DarkRadioButton();
+            this.lblPointsIncrease = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.lblJewelMaxLevel = new System.Windows.Forms.Label();
             this.nudJewelMaxLevel = new DarkUI.Controls.DarkNumericUpDown();
             this.btnExpGrid = new DarkUI.Controls.DarkButton();
@@ -290,6 +316,17 @@ namespace Intersect.Editor.Forms.Editors
             ((System.ComponentModel.ISupportInitialize)(this.picItem)).BeginInit();
             this.grpEquipment.SuspendLayout();
             this.grpJewelLeveling.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.expGrid)).BeginInit();
+            this.grpExpGrid.SuspendLayout();
+            this.darkGroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPointsIncrease)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudJewelMaxLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBaseExp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudExpIncrease)).BeginInit();
@@ -1350,7 +1387,7 @@ namespace Intersect.Editor.Forms.Editors
             this.grpEquipment.ForeColor = System.Drawing.Color.Gainsboro;
             this.grpEquipment.Location = new System.Drawing.Point(2, 700);
             this.grpEquipment.Name = "grpEquipment";
-            this.grpEquipment.Size = new System.Drawing.Size(439, 847);
+            this.grpEquipment.Size = new System.Drawing.Size(439, 886);
             this.grpEquipment.TabIndex = 12;
             this.grpEquipment.TabStop = false;
             this.grpEquipment.Text = "Equipment";
@@ -1360,6 +1397,8 @@ namespace Intersect.Editor.Forms.Editors
             // 
             this.grpJewelLeveling.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.grpJewelLeveling.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.grpJewelLeveling.Controls.Add(this.expGrid);
+            this.grpJewelLeveling.Controls.Add(this.grpExpGrid);
             this.grpJewelLeveling.Controls.Add(this.lblJewelMaxLevel);
             this.grpJewelLeveling.Controls.Add(this.nudJewelMaxLevel);
             this.grpJewelLeveling.Controls.Add(this.btnExpGrid);
@@ -1373,10 +1412,362 @@ namespace Intersect.Editor.Forms.Editors
             this.grpJewelLeveling.Margin = new System.Windows.Forms.Padding(2);
             this.grpJewelLeveling.Name = "grpJewelLeveling";
             this.grpJewelLeveling.Padding = new System.Windows.Forms.Padding(2);
-            this.grpJewelLeveling.Size = new System.Drawing.Size(424, 220);
+            this.grpJewelLeveling.Size = new System.Drawing.Size(424, 340);
             this.grpJewelLeveling.TabIndex = 112;
             this.grpJewelLeveling.TabStop = false;
             this.grpJewelLeveling.Text = "Jewel Levelin";
+            // 
+            // expGrid
+            // 
+            this.expGrid.AllowUserToAddRows = false;
+            this.expGrid.AllowUserToDeleteRows = false;
+            this.expGrid.AllowUserToResizeColumns = false;
+            this.expGrid.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(53)))), ((int)(((byte)(55)))));
+            this.expGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.expGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.expGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.expGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.expGrid.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.expGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.expGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.expGrid.ColumnHeadersHeight = 24;
+            this.expGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.expGrid.EnableHeadersVisualStyles = false;
+            this.expGrid.Location = new System.Drawing.Point(6, 210);
+            this.expGrid.MultiSelect = false;
+            this.expGrid.Name = "expGrid";
+            this.expGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
+            this.expGrid.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.expGrid.Size = new System.Drawing.Size(407, 125);
+            this.expGrid.TabIndex = 0;
+            // 
+            // grpExpGrid
+            // 
+            this.grpExpGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.grpExpGrid.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.grpExpGrid.Controls.Add(this.btnResetExpGrid);
+            this.grpExpGrid.Controls.Add(this.btnCloseExpGrid);
+            this.grpExpGrid.Controls.Add(this.darkGroupBox1);
+            this.grpExpGrid.ForeColor = System.Drawing.Color.Gainsboro;
+            this.grpExpGrid.Location = new System.Drawing.Point(10, 56);
+            this.grpExpGrid.Margin = new System.Windows.Forms.Padding(2);
+            this.grpExpGrid.Name = "grpExpGrid";
+            this.grpExpGrid.Padding = new System.Windows.Forms.Padding(2);
+            this.grpExpGrid.Size = new System.Drawing.Size(407, 124);
+            this.grpExpGrid.TabIndex = 40;
+            this.grpExpGrid.TabStop = false;
+            this.grpExpGrid.Text = "Experience Overrides";
+            // 
+            // btnResetExpGrid
+            // 
+            this.btnResetExpGrid.Location = new System.Drawing.Point(7, 148);
+            this.btnResetExpGrid.Margin = new System.Windows.Forms.Padding(2);
+            this.btnResetExpGrid.Name = "btnResetExpGrid";
+            this.btnResetExpGrid.Padding = new System.Windows.Forms.Padding(5);
+            this.btnResetExpGrid.Size = new System.Drawing.Size(83, 21);
+            this.btnResetExpGrid.TabIndex = 39;
+            this.btnResetExpGrid.Text = "Reset Grid";
+            // 
+            // btnCloseExpGrid
+            // 
+            this.btnCloseExpGrid.Location = new System.Drawing.Point(411, 148);
+            this.btnCloseExpGrid.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCloseExpGrid.Name = "btnCloseExpGrid";
+            this.btnCloseExpGrid.Padding = new System.Windows.Forms.Padding(5);
+            this.btnCloseExpGrid.Size = new System.Drawing.Size(111, 21);
+            this.btnCloseExpGrid.TabIndex = 38;
+            this.btnCloseExpGrid.Text = "Close";
+            // 
+            // darkGroupBox1
+            // 
+            this.darkGroupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.darkGroupBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.darkGroupBox1.Controls.Add(this.darkNumericUpDown1);
+            this.darkGroupBox1.Controls.Add(this.darkNumericUpDown2);
+            this.darkGroupBox1.Controls.Add(this.nudPointsIncrease);
+            this.darkGroupBox1.Controls.Add(this.darkNumericUpDown3);
+            this.darkGroupBox1.Controls.Add(this.darkNumericUpDown4);
+            this.darkGroupBox1.Controls.Add(this.darkNumericUpDown5);
+            this.darkGroupBox1.Controls.Add(this.darkNumericUpDown6);
+            this.darkGroupBox1.Controls.Add(this.darkNumericUpDown7);
+            this.darkGroupBox1.Controls.Add(this.darkRadioButton1);
+            this.darkGroupBox1.Controls.Add(this.darkRadioButton2);
+            this.darkGroupBox1.Controls.Add(this.lblPointsIncrease);
+            this.darkGroupBox1.Controls.Add(this.label1);
+            this.darkGroupBox1.Controls.Add(this.label2);
+            this.darkGroupBox1.Controls.Add(this.label3);
+            this.darkGroupBox1.Controls.Add(this.label4);
+            this.darkGroupBox1.Controls.Add(this.label5);
+            this.darkGroupBox1.Controls.Add(this.label6);
+            this.darkGroupBox1.Controls.Add(this.label7);
+            this.darkGroupBox1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.darkGroupBox1.Location = new System.Drawing.Point(0, 0);
+            this.darkGroupBox1.Name = "darkGroupBox1";
+            this.darkGroupBox1.Size = new System.Drawing.Size(429, 116);
+            this.darkGroupBox1.TabIndex = 23;
+            this.darkGroupBox1.TabStop = false;
+            this.darkGroupBox1.Text = "Level Up Boosts";
+            // 
+            // darkNumericUpDown1
+            // 
+            this.darkNumericUpDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.darkNumericUpDown1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.darkNumericUpDown1.Location = new System.Drawing.Point(11, 47);
+            this.darkNumericUpDown1.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.darkNumericUpDown1.Name = "darkNumericUpDown1";
+            this.darkNumericUpDown1.Size = new System.Drawing.Size(70, 20);
+            this.darkNumericUpDown1.TabIndex = 36;
+            this.darkNumericUpDown1.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // darkNumericUpDown2
+            // 
+            this.darkNumericUpDown2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.darkNumericUpDown2.ForeColor = System.Drawing.Color.Gainsboro;
+            this.darkNumericUpDown2.Location = new System.Drawing.Point(111, 47);
+            this.darkNumericUpDown2.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.darkNumericUpDown2.Name = "darkNumericUpDown2";
+            this.darkNumericUpDown2.Size = new System.Drawing.Size(70, 20);
+            this.darkNumericUpDown2.TabIndex = 35;
+            this.darkNumericUpDown2.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // nudPointsIncrease
+            // 
+            this.nudPointsIncrease.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.nudPointsIncrease.ForeColor = System.Drawing.Color.Gainsboro;
+            this.nudPointsIncrease.Location = new System.Drawing.Point(311, 90);
+            this.nudPointsIncrease.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudPointsIncrease.Name = "nudPointsIncrease";
+            this.nudPointsIncrease.Size = new System.Drawing.Size(70, 20);
+            this.nudPointsIncrease.TabIndex = 34;
+            this.nudPointsIncrease.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // darkNumericUpDown3
+            // 
+            this.darkNumericUpDown3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.darkNumericUpDown3.ForeColor = System.Drawing.Color.Gainsboro;
+            this.darkNumericUpDown3.Location = new System.Drawing.Point(311, 47);
+            this.darkNumericUpDown3.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.darkNumericUpDown3.Name = "darkNumericUpDown3";
+            this.darkNumericUpDown3.Size = new System.Drawing.Size(70, 20);
+            this.darkNumericUpDown3.TabIndex = 33;
+            this.darkNumericUpDown3.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // darkNumericUpDown4
+            // 
+            this.darkNumericUpDown4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.darkNumericUpDown4.ForeColor = System.Drawing.Color.Gainsboro;
+            this.darkNumericUpDown4.Location = new System.Drawing.Point(211, 90);
+            this.darkNumericUpDown4.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.darkNumericUpDown4.Name = "darkNumericUpDown4";
+            this.darkNumericUpDown4.Size = new System.Drawing.Size(70, 20);
+            this.darkNumericUpDown4.TabIndex = 32;
+            this.darkNumericUpDown4.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // darkNumericUpDown5
+            // 
+            this.darkNumericUpDown5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.darkNumericUpDown5.ForeColor = System.Drawing.Color.Gainsboro;
+            this.darkNumericUpDown5.Location = new System.Drawing.Point(111, 90);
+            this.darkNumericUpDown5.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.darkNumericUpDown5.Name = "darkNumericUpDown5";
+            this.darkNumericUpDown5.Size = new System.Drawing.Size(70, 20);
+            this.darkNumericUpDown5.TabIndex = 31;
+            this.darkNumericUpDown5.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // darkNumericUpDown6
+            // 
+            this.darkNumericUpDown6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.darkNumericUpDown6.ForeColor = System.Drawing.Color.Gainsboro;
+            this.darkNumericUpDown6.Location = new System.Drawing.Point(211, 47);
+            this.darkNumericUpDown6.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.darkNumericUpDown6.Name = "darkNumericUpDown6";
+            this.darkNumericUpDown6.Size = new System.Drawing.Size(70, 20);
+            this.darkNumericUpDown6.TabIndex = 30;
+            this.darkNumericUpDown6.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // darkNumericUpDown7
+            // 
+            this.darkNumericUpDown7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.darkNumericUpDown7.ForeColor = System.Drawing.Color.Gainsboro;
+            this.darkNumericUpDown7.Location = new System.Drawing.Point(11, 90);
+            this.darkNumericUpDown7.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.darkNumericUpDown7.Name = "darkNumericUpDown7";
+            this.darkNumericUpDown7.Size = new System.Drawing.Size(70, 20);
+            this.darkNumericUpDown7.TabIndex = 29;
+            this.darkNumericUpDown7.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            // 
+            // darkRadioButton1
+            // 
+            this.darkRadioButton1.AutoSize = true;
+            this.darkRadioButton1.Location = new System.Drawing.Point(66, 15);
+            this.darkRadioButton1.Name = "darkRadioButton1";
+            this.darkRadioButton1.Size = new System.Drawing.Size(80, 17);
+            this.darkRadioButton1.TabIndex = 1;
+            this.darkRadioButton1.Text = "Percentage";
+            // 
+            // darkRadioButton2
+            // 
+            this.darkRadioButton2.AutoSize = true;
+            this.darkRadioButton2.Checked = true;
+            this.darkRadioButton2.Location = new System.Drawing.Point(7, 15);
+            this.darkRadioButton2.Name = "darkRadioButton2";
+            this.darkRadioButton2.Size = new System.Drawing.Size(52, 17);
+            this.darkRadioButton2.TabIndex = 0;
+            this.darkRadioButton2.TabStop = true;
+            this.darkRadioButton2.Text = "Static";
+            // 
+            // lblPointsIncrease
+            // 
+            this.lblPointsIncrease.AutoSize = true;
+            this.lblPointsIncrease.Location = new System.Drawing.Point(308, 77);
+            this.lblPointsIncrease.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPointsIncrease.Name = "lblPointsIncrease";
+            this.lblPointsIncrease.Size = new System.Drawing.Size(39, 13);
+            this.lblPointsIncrease.TabIndex = 18;
+            this.lblPointsIncrease.Text = "Points:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 31);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Max HP:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(111, 31);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Max MP:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(208, 77);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Move Speed:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 77);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(50, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Strength:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(308, 31);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(71, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Magic Resist:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(208, 31);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(37, 13);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "Armor:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(108, 77);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(39, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Magic:";
             // 
             // lblJewelMaxLevel
             // 
@@ -1410,7 +1801,8 @@ namespace Intersect.Editor.Forms.Editors
             this.btnExpGrid.Padding = new System.Windows.Forms.Padding(5);
             this.btnExpGrid.Size = new System.Drawing.Size(111, 21);
             this.btnExpGrid.TabIndex = 37;
-            this.btnExpGrid.Text = "Experience Grid";
+            this.btnExpGrid.Text = "Generate Exp Grid";
+            this.btnExpGrid.Click += new System.EventHandler(this.btnExpGrid_Click);
             // 
             // nudBaseExp
             // 
@@ -3813,6 +4205,18 @@ namespace Intersect.Editor.Forms.Editors
             this.grpEquipment.PerformLayout();
             this.grpJewelLeveling.ResumeLayout(false);
             this.grpJewelLeveling.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.expGrid)).EndInit();
+            this.grpExpGrid.ResumeLayout(false);
+            this.darkGroupBox1.ResumeLayout(false);
+            this.darkGroupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPointsIncrease)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.darkNumericUpDown7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudJewelMaxLevel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBaseExp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudExpIncrease)).EndInit();
@@ -4131,5 +4535,28 @@ namespace Intersect.Editor.Forms.Editors
         private DarkGroupBox grpJewelProperties;
         private DarkNumericUpDown nudSlotsRequired;
         private Label lblSlotsRequired;
+        private DarkGroupBox grpExpGrid;
+        private DarkButton btnResetExpGrid;
+        private DarkButton btnCloseExpGrid;
+        private DataGridView expGrid;
+        private DarkGroupBox darkGroupBox1;
+        private DarkNumericUpDown darkNumericUpDown1;
+        private DarkNumericUpDown darkNumericUpDown2;
+        private DarkNumericUpDown nudPointsIncrease;
+        private DarkNumericUpDown darkNumericUpDown3;
+        private DarkNumericUpDown darkNumericUpDown4;
+        private DarkNumericUpDown darkNumericUpDown5;
+        private DarkNumericUpDown darkNumericUpDown6;
+        private DarkNumericUpDown darkNumericUpDown7;
+        private DarkRadioButton darkRadioButton1;
+        private DarkRadioButton darkRadioButton2;
+        private Label lblPointsIncrease;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private Label label6;
+        private Label label7;
     }
 }

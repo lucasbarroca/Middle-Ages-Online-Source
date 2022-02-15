@@ -19,6 +19,9 @@ namespace Intersect.GameObjects
 
     public class ItemBase : DatabaseObject<ItemBase>, IFolderable
     {
+        public const long DEFAULT_BASE_EXPERIENCE = 100;
+
+        public const long DEFAULT_EXPERIENCE_INCREASE = 50;
 
         [NotMapped] public ConditionLists UsageRequirements = new ConditionLists();
 
@@ -406,8 +409,6 @@ namespace Intersect.GameObjects
 
         [JsonIgnore] private long mExpIncrease { get; set; }
 
-        public bool increasePercentage { get; set; }
-
         public long BaseExp
         {
             get => mBaseExp;
@@ -432,7 +433,7 @@ namespace Intersect.GameObjects
 
         [JsonIgnore]
         [NotMapped]
-        public ExperienceCurve ExperienceCurve { get; }
+        public ExperienceCurve ExperienceCurve { get; set; }
 
         [NotMapped] public int[] StatIncrease = new int[(int)Stats.StatCount];
 
@@ -514,6 +515,10 @@ namespace Intersect.GameObjects
             Consumable = new ConsumableData();
             Effect = new EffectData();
             Color = new Color(255, 255, 255, 255);
+            ExperienceCurve = new ExperienceCurve();
+            ExperienceCurve.Calculate(1);
+            BaseExp = DEFAULT_BASE_EXPERIENCE;
+            ExpIncrease = DEFAULT_EXPERIENCE_INCREASE;
         }
 
     }

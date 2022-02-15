@@ -342,6 +342,26 @@ namespace Intersect.Editor.Forms.Editors
             grpAdditionalWeaponProps.Text = Strings.ItemEditor.AdditionalWeaponProps;
             chkBackstab.Text = Strings.ItemEditor.CanBackstab;
             lblBackstabMultiplier.Text = Strings.ItemEditor.BackstabMultiplier;
+
+            // Init the exp grid
+            var levelCol = new DataGridViewTextBoxColumn();
+            levelCol.HeaderText = Strings.ClassEditor.gridlevel;
+            levelCol.ReadOnly = true;
+            levelCol.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+            var tnlCol = new DataGridViewTextBoxColumn();
+            tnlCol.HeaderText = Strings.ClassEditor.gridtnl;
+            tnlCol.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+            var totalCol = new DataGridViewTextBoxColumn();
+            totalCol.HeaderText = Strings.ClassEditor.gridtotalexp;
+            totalCol.ReadOnly = true;
+            totalCol.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+            expGrid.Columns.Clear();
+            expGrid.Columns.Add(levelCol);
+            expGrid.Columns.Add(tnlCol);
+            expGrid.Columns.Add(totalCol);
         }
 
         private void UpdateEditor()
@@ -503,6 +523,14 @@ namespace Intersect.Editor.Forms.Editors
                 chkEnableDestroy.Checked = mEditorItem.CanDestroy;
                 txtCannotDestroy.Text = mEditorItem.CannotDestroyMessage;
 
+                // Jewel stuffs
+                nudBaseExp.Value = mEditorItem.BaseExp;
+                nudExpIncrease.Value = mEditorItem.ExpIncrease;
+                nudJewelMaxLevel.Value = mEditorItem.MaxLevel;
+                rdoPercentageIncrease.Checked = mEditorItem.IncreasePercentage;
+                rdoStaticIncrease.Checked = !mEditorItem.IncreasePercentage;
+                UpdateIncreases();
+                UpdateExpGridValues(1);
 
                 if (mChanged.IndexOf(mEditorItem) == -1)
                 {
@@ -526,6 +554,7 @@ namespace Intersect.Editor.Forms.Editors
             grpEvent.Visible = false;
             grpBags.Visible = false;
             chkStackable.Enabled = true;
+            expGrid.Visible = false;
 
             if ((int) mEditorItem.ItemType != cmbType.SelectedIndex)
             {
@@ -612,6 +641,8 @@ namespace Intersect.Editor.Forms.Editors
                 lblEquipmentAnimation.Visible = false;
                 lblEquipmentSlot.Visible = false;
                 cmbEquipmentSlot.Visible = false;
+                expGrid.Visible = true;
+                UpdateExpGridValues(1);
 
                 cmbEquipmentBonus.SelectedIndex = (int)mEditorItem.Effect.Type;
 
@@ -1574,11 +1605,13 @@ namespace Intersect.Editor.Forms.Editors
         private void rdoStaticIncrease_CheckedChanged(object sender, EventArgs e)
         {
             mEditorItem.IncreasePercentage = rdoPercentageIncrease.Checked;
+            UpdateIncreases();
         }
 
         private void rdoPercentageIncrease_CheckedChanged(object sender, EventArgs e)
         {
             mEditorItem.IncreasePercentage = rdoPercentageIncrease.Checked;
+            UpdateIncreases();
         }
 
         private void nudHpIncrease_ValueChanged(object sender, EventArgs e)
@@ -1594,36 +1627,180 @@ namespace Intersect.Editor.Forms.Editors
         private void nudArmorIncrease_ValueChanged(object sender, EventArgs e)
         {
             mEditorItem.StatIncrease[(int)Stats.Defense] = (int)nudArmorIncrease.Value;
+            UpdateIncreases();
         }
 
         private void nudMagicResistIncrease_ValueChanged(object sender, EventArgs e)
         {
             mEditorItem.StatIncrease[(int)Stats.MagicResist] = (int)nudMagicResistIncrease.Value;
+            UpdateIncreases();
         }
 
         private void nudStrengthIncrease_ValueChanged(object sender, EventArgs e)
         {
-            mEditorItem.StatIncrease[(int)Stats.Attack] = (int)nudMagicResistIncrease.Value;
+            mEditorItem.StatIncrease[(int)Stats.Attack] = (int)nudStrengthIncrease.Value;
+            UpdateIncreases();
         }
 
         private void nudMagicIncrease_ValueChanged(object sender, EventArgs e)
         {
-            mEditorItem.StatIncrease[(int)Stats.AbilityPower] = (int)nudMagicResistIncrease.Value;
+            mEditorItem.StatIncrease[(int)Stats.AbilityPower] = (int)nudMagicIncrease.Value;
+            UpdateIncreases();
         }
 
         private void nudSpeedIncrease_ValueChanged(object sender, EventArgs e)
         {
-            mEditorItem.StatIncrease[(int)Stats.Speed] = (int)nudMagicResistIncrease.Value;
+            mEditorItem.StatIncrease[(int)Stats.Speed] = (int)nudSpeedIncrease.Value;
+            UpdateIncreases();
         }
 
         private void nudBonusIncrease_ValueChanged(object sender, EventArgs e)
         {
             mEditorItem.BonusIncrease = (int)nudBonusIncrease.Value;
+            UpdateIncreases();
         }
 
         private void nudSlotsRequired_ValueChanged(object sender, EventArgs e)
         {
             mEditorItem.SlotsRequired = (int) nudSlotsRequired.Value;
+        }
+
+        private void UpdateIncreases()
+        {
+            if (rdoStaticIncrease.Checked)
+            {
+                nudHpIncrease.Maximum = 10000;
+                nudMpIncrease.Maximum = 10000;
+                nudStrengthIncrease.Maximum = Options.MaxStatValue;
+                nudArmorIncrease.Maximum = Options.MaxStatValue;
+                nudMagicIncrease.Maximum = Options.MaxStatValue;
+                nudMagicResistIncrease.Maximum = Options.MaxStatValue;
+                nudSpeedIncrease.Maximum = Options.MaxStatValue;
+            }
+            else
+            {
+                nudHpIncrease.Maximum = 100;
+                nudMpIncrease.Maximum = 100;
+                nudStrengthIncrease.Maximum = 100;
+                nudArmorIncrease.Maximum = 100;
+                nudMagicIncrease.Maximum = 100;
+                nudMagicResistIncrease.Maximum = 100;
+                nudSpeedIncrease.Maximum = 100;
+            }
+
+            nudHpIncrease.Value = Math.Min(nudHpIncrease.Maximum, mEditorItem.VitalIncrease[(int)Vitals.Health]);
+            nudMpIncrease.Value = Math.Min(nudMpIncrease.Maximum, mEditorItem.VitalIncrease[(int)Vitals.Mana]);
+
+            nudStrengthIncrease.Value = Math.Min(
+                nudStrengthIncrease.Maximum, mEditorItem.StatIncrease[(int)Stats.Attack]
+            );
+
+            nudArmorIncrease.Value = Math.Min(nudArmorIncrease.Maximum, mEditorItem.StatIncrease[(int)Stats.Defense]);
+            nudMagicIncrease.Value = Math.Min(
+                nudMagicIncrease.Maximum, mEditorItem.StatIncrease[(int)Stats.AbilityPower]
+            );
+
+            nudMagicResistIncrease.Value = Math.Min(
+                nudMagicResistIncrease.Maximum, mEditorItem.StatIncrease[(int)Stats.MagicResist]
+            );
+
+            nudSpeedIncrease.Value = Math.Min(nudSpeedIncrease.Maximum, mEditorItem.StatIncrease[(int)Stats.Speed]);
+
+            lblHpIncrease.Text = Strings.ClassEditor.hpboost.ToString(
+                rdoStaticIncrease.Checked ? "" : Strings.ClassEditor.boostpercent.ToString()
+            );
+
+            lblMpIncrease.Text = Strings.ClassEditor.mpboost.ToString(
+                rdoStaticIncrease.Checked ? "" : Strings.ClassEditor.boostpercent.ToString()
+            );
+
+            lblStrengthIncrease.Text = Strings.ClassEditor.attackboost.ToString(
+                rdoStaticIncrease.Checked ? "" : Strings.ClassEditor.boostpercent.ToString()
+            );
+
+            lblArmorIncrease.Text = Strings.ClassEditor.armorboost.ToString(
+                rdoStaticIncrease.Checked ? "" : Strings.ClassEditor.boostpercent.ToString()
+            );
+
+            lblSpeedIncrease.Text = Strings.ClassEditor.speedboost.ToString(
+                rdoStaticIncrease.Checked ? "" : Strings.ClassEditor.boostpercent.ToString()
+            );
+
+            lblMagicIncrease.Text = Strings.ClassEditor.abilitypowerboost.ToString(
+                rdoStaticIncrease.Checked ? "" : Strings.ClassEditor.boostpercent.ToString()
+            );
+
+            lblMagicResistIncrease.Text = Strings.ClassEditor.magicresistboost.ToString(
+                rdoStaticIncrease.Checked ? "" : Strings.ClassEditor.boostpercent.ToString()
+            );
+
+            nudBonusIncrease.Value = mEditorItem.BonusIncrease;
+        }
+
+        private void btnExpGrid_Click(object sender, EventArgs e)
+        {
+            grpExpGrid.Show();
+            grpExpGrid.BringToFront();
+
+            expGrid.Rows.Clear();
+
+            for (var i = 1; i <= nudJewelMaxLevel.Value; i++)
+            {
+                var index = expGrid.Rows.Add(i.ToString(), "", "");
+                var row = expGrid.Rows[index];
+                row.Cells[0].Style.SelectionBackColor = row.Cells[0].Style.BackColor;
+                row.Cells[2].Style.SelectionBackColor = row.Cells[2].Style.BackColor;
+            }
+
+            UpdateExpGridValues(1);
+        }
+
+        private void UpdateExpGridValues(int start, int end = -1)
+        {
+            if (end == -1)
+            {
+                end = (int)nudJewelMaxLevel.Value;
+            }
+
+            if (start > end)
+            {
+                return;
+            }
+
+            if (start < 1)
+            {
+                start = 1;
+            }
+
+            for (var i = start; i <= end; i++)
+            {
+                if (i < nudJewelMaxLevel.Value)
+                {
+                    expGrid.Rows[i - 1].Cells[1].Value = Convert.ChangeType(
+                        mEditorItem.ExperienceCurve.Calculate(i), expGrid.Rows[i - 1].Cells[1].ValueType
+                    );
+
+                    expGrid.Rows[i - 1].Cells[1].Style.ApplyStyle(expGrid.Rows[i - 1].Cells[0].InheritedStyle);
+                }
+                else
+                {
+                    expGrid.Rows[i - 1].Cells[1].Value = Convert.ChangeType(0, expGrid.Rows[i - 1].Cells[1].ValueType);
+                    expGrid.Rows[i - 1].Cells[1].ReadOnly = true;
+                }
+
+                if (i == 1)
+                {
+                    expGrid.Rows[i - 1].Cells[2].Value = Convert.ChangeType(0, expGrid.Rows[i - 1].Cells[1].ValueType);
+                }
+                else
+                {
+                    expGrid.Rows[i - 1].Cells[2].Value = Convert.ChangeType(
+                        long.Parse(expGrid.Rows[i - 2].Cells[2].Value.ToString()) +
+                        long.Parse(expGrid.Rows[i - 2].Cells[1].Value.ToString()),
+                        expGrid.Rows[i - 1].Cells[2].ValueType
+                    );
+                }
+            }
         }
     }
 }
