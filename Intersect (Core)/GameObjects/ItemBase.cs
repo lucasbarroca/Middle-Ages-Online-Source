@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 using Newtonsoft.Json;
+using Intersect.Server.Utilities;
 
 namespace Intersect.GameObjects
 {
@@ -398,6 +399,68 @@ namespace Intersect.GameObjects
         public bool CanBackstab { get; set; } = false;
         
         public float BackstabMultiplier { get; set; } = 1.0f;
+
+        // Jewel props
+
+        [JsonIgnore] private long mBaseExp { get; set; }
+
+        [JsonIgnore] private long mExpIncrease { get; set; }
+
+        public bool increasePercentage { get; set; }
+
+        public long BaseExp
+        {
+            get => mBaseExp;
+            set
+            {
+                mBaseExp = Math.Max(0, value);
+                ExperienceCurve.BaseExperience = Math.Max(1, mBaseExp);
+            }
+        }
+
+        public long ExpIncrease
+        {
+            get => mExpIncrease;
+            set
+            {
+                mExpIncrease = Math.Max(0, value);
+                ExperienceCurve.Gain = 1 + value / 100.0;
+            }
+        }
+
+        public bool IncreasePercentage { get; set; }
+
+        [JsonIgnore]
+        [NotMapped]
+        public ExperienceCurve ExperienceCurve { get; }
+
+        [NotMapped] public int[] StatIncrease = new int[(int)Stats.StatCount];
+
+        [NotMapped] public int[] VitalIncrease = new int[(int)Vitals.VitalCount];
+
+        //Stat Increases (per level)
+        [JsonIgnore]
+        [Column("StatIncreases")]
+        public string StatIncreaseJson
+        {
+            get => DatabaseUtils.SaveIntArray(StatIncrease, (int)Stats.StatCount);
+            set => StatIncrease = DatabaseUtils.LoadIntArray(value, (int)Stats.StatCount);
+        }
+
+        //Vital Increases (per level0
+        [JsonIgnore]
+        [Column("VitalIncreases")]
+        public string VitalIncreaseJson
+        {
+            get => DatabaseUtils.SaveIntArray(VitalIncrease, (int)Vitals.VitalCount);
+            set => VitalIncrease = DatabaseUtils.LoadIntArray(value, (int)Vitals.VitalCount);
+        }
+
+        public int BonusIncrease { get; set; }
+        
+        public int MaxLevel { get; set; }
+
+        public int SlotsRequired { get; set; }
 
         /// <summary>
         /// Gets an array of all items sharing the provided cooldown group.

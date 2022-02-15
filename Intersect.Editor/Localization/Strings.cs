@@ -3577,6 +3577,7 @@ Tick timer saved in server config.json.";
                 {4, @"Spell"},
                 {5, @"Event"},
                 {6, @"Bag"},
+                {7, @"Jewel"},
             };
 
             public static LocalizedString undo = @"Undo Changes";

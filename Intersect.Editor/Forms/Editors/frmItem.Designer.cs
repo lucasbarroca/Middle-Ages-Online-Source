@@ -41,6 +41,8 @@ namespace Intersect.Editor.Forms.Editors
             this.btnCancel = new DarkUI.Controls.DarkButton();
             this.btnSave = new DarkUI.Controls.DarkButton();
             this.grpGeneral = new DarkUI.Controls.DarkGroupBox();
+            this.lblDrops = new System.Windows.Forms.Label();
+            this.lstDrops = new System.Windows.Forms.ListBox();
             this.grpDestroy = new DarkUI.Controls.DarkGroupBox();
             this.chkEnableDestroy = new DarkUI.Controls.DarkCheckBox();
             this.lblDestroyMessage = new System.Windows.Forms.Label();
@@ -104,11 +106,41 @@ namespace Intersect.Editor.Forms.Editors
             this.lblName = new System.Windows.Forms.Label();
             this.txtName = new DarkUI.Controls.DarkTextBox();
             this.grpEquipment = new DarkUI.Controls.DarkGroupBox();
+            this.grpJewelLeveling = new DarkUI.Controls.DarkGroupBox();
+            this.lblJewelMaxLevel = new System.Windows.Forms.Label();
+            this.nudJewelMaxLevel = new DarkUI.Controls.DarkNumericUpDown();
+            this.btnExpGrid = new DarkUI.Controls.DarkButton();
+            this.nudBaseExp = new DarkUI.Controls.DarkNumericUpDown();
+            this.nudExpIncrease = new DarkUI.Controls.DarkNumericUpDown();
+            this.lblExpIncrease = new System.Windows.Forms.Label();
+            this.lblBaseExp = new System.Windows.Forms.Label();
+            this.grpLevelBoosts = new DarkUI.Controls.DarkGroupBox();
+            this.nudHpIncrease = new DarkUI.Controls.DarkNumericUpDown();
+            this.nudMpIncrease = new DarkUI.Controls.DarkNumericUpDown();
+            this.nudBonusIncrease = new DarkUI.Controls.DarkNumericUpDown();
+            this.nudMagicResistIncrease = new DarkUI.Controls.DarkNumericUpDown();
+            this.nudSpeedIncrease = new DarkUI.Controls.DarkNumericUpDown();
+            this.nudMagicIncrease = new DarkUI.Controls.DarkNumericUpDown();
+            this.nudArmorIncrease = new DarkUI.Controls.DarkNumericUpDown();
+            this.nudStrengthIncrease = new DarkUI.Controls.DarkNumericUpDown();
+            this.rdoPercentageIncrease = new DarkUI.Controls.DarkRadioButton();
+            this.rdoStaticIncrease = new DarkUI.Controls.DarkRadioButton();
+            this.lblBonusIncrease = new System.Windows.Forms.Label();
+            this.lblHpIncrease = new System.Windows.Forms.Label();
+            this.lblMpIncrease = new System.Windows.Forms.Label();
+            this.lblSpeedIncrease = new System.Windows.Forms.Label();
+            this.lblStrengthIncrease = new System.Windows.Forms.Label();
+            this.lblMagicResistIncrease = new System.Windows.Forms.Label();
+            this.lblArmorIncrease = new System.Windows.Forms.Label();
+            this.lblMagicIncrease = new System.Windows.Forms.Label();
             this.grpAdditionalWeaponProps = new DarkUI.Controls.DarkGroupBox();
             this.lblBackstabMultiplier = new System.Windows.Forms.Label();
             this.chkBackstab = new DarkUI.Controls.DarkCheckBox();
             this.nudBackstabMultiplier = new DarkUI.Controls.DarkNumericUpDown();
             this.grpHelmetPaperdollProps = new DarkUI.Controls.DarkGroupBox();
+            this.grpJewelProperties = new DarkUI.Controls.DarkGroupBox();
+            this.nudSlotsRequired = new DarkUI.Controls.DarkNumericUpDown();
+            this.lblSlotsRequired = new System.Windows.Forms.Label();
             this.chkHelmHideExtra = new DarkUI.Controls.DarkCheckBox();
             this.chkHelmHideBeard = new DarkUI.Controls.DarkCheckBox();
             this.chkHelmHideHair = new DarkUI.Controls.DarkCheckBox();
@@ -241,8 +273,6 @@ namespace Intersect.Editor.Forms.Editors
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripItemUndo = new System.Windows.Forms.ToolStripButton();
             this.vS2015DarkTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme();
-            this.lstDrops = new System.Windows.Forms.ListBox();
-            this.lblDrops = new System.Windows.Forms.Label();
             this.grpItems.SuspendLayout();
             this.grpGeneral.SuspendLayout();
             this.grpDestroy.SuspendLayout();
@@ -259,9 +289,24 @@ namespace Intersect.Editor.Forms.Editors
             ((System.ComponentModel.ISupportInitialize)(this.nudPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picItem)).BeginInit();
             this.grpEquipment.SuspendLayout();
+            this.grpJewelLeveling.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudJewelMaxLevel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBaseExp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudExpIncrease)).BeginInit();
+            this.grpLevelBoosts.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHpIncrease)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMpIncrease)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBonusIncrease)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMagicResistIncrease)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpeedIncrease)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMagicIncrease)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudArmorIncrease)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStrengthIncrease)).BeginInit();
             this.grpAdditionalWeaponProps.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBackstabMultiplier)).BeginInit();
             this.grpHelmetPaperdollProps.SuspendLayout();
+            this.grpJewelProperties.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSlotsRequired)).BeginInit();
             this.grpPrayerProperties.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudComboExpBoost)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudComboInterval)).BeginInit();
@@ -444,6 +489,27 @@ namespace Intersect.Editor.Forms.Editors
             this.grpGeneral.TabIndex = 2;
             this.grpGeneral.TabStop = false;
             this.grpGeneral.Text = "General";
+            // 
+            // lblDrops
+            // 
+            this.lblDrops.AutoSize = true;
+            this.lblDrops.Location = new System.Drawing.Point(259, 425);
+            this.lblDrops.Name = "lblDrops";
+            this.lblDrops.Size = new System.Drawing.Size(104, 13);
+            this.lblDrops.TabIndex = 108;
+            this.lblDrops.Text = "NPCs that Drop This";
+            // 
+            // lstDrops
+            // 
+            this.lstDrops.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
+            this.lstDrops.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lstDrops.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lstDrops.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lstDrops.FormattingEnabled = true;
+            this.lstDrops.Location = new System.Drawing.Point(262, 441);
+            this.lstDrops.Name = "lstDrops";
+            this.lstDrops.Size = new System.Drawing.Size(171, 80);
+            this.lstDrops.TabIndex = 107;
             // 
             // grpDestroy
             // 
@@ -1259,6 +1325,7 @@ namespace Intersect.Editor.Forms.Editors
             // 
             this.grpEquipment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.grpEquipment.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.grpEquipment.Controls.Add(this.grpJewelLeveling);
             this.grpEquipment.Controls.Add(this.grpAdditionalWeaponProps);
             this.grpEquipment.Controls.Add(this.grpHelmetPaperdollProps);
             this.grpEquipment.Controls.Add(this.grpPrayerProperties);
@@ -1288,6 +1355,412 @@ namespace Intersect.Editor.Forms.Editors
             this.grpEquipment.TabStop = false;
             this.grpEquipment.Text = "Equipment";
             this.grpEquipment.Visible = false;
+            // 
+            // grpJewelLeveling
+            // 
+            this.grpJewelLeveling.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.grpJewelLeveling.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.grpJewelLeveling.Controls.Add(this.lblJewelMaxLevel);
+            this.grpJewelLeveling.Controls.Add(this.nudJewelMaxLevel);
+            this.grpJewelLeveling.Controls.Add(this.btnExpGrid);
+            this.grpJewelLeveling.Controls.Add(this.nudBaseExp);
+            this.grpJewelLeveling.Controls.Add(this.nudExpIncrease);
+            this.grpJewelLeveling.Controls.Add(this.lblExpIncrease);
+            this.grpJewelLeveling.Controls.Add(this.lblBaseExp);
+            this.grpJewelLeveling.Controls.Add(this.grpLevelBoosts);
+            this.grpJewelLeveling.ForeColor = System.Drawing.Color.Gainsboro;
+            this.grpJewelLeveling.Location = new System.Drawing.Point(9, 535);
+            this.grpJewelLeveling.Margin = new System.Windows.Forms.Padding(2);
+            this.grpJewelLeveling.Name = "grpJewelLeveling";
+            this.grpJewelLeveling.Padding = new System.Windows.Forms.Padding(2);
+            this.grpJewelLeveling.Size = new System.Drawing.Size(424, 220);
+            this.grpJewelLeveling.TabIndex = 112;
+            this.grpJewelLeveling.TabStop = false;
+            this.grpJewelLeveling.Text = "Jewel Levelin";
+            // 
+            // lblJewelMaxLevel
+            // 
+            this.lblJewelMaxLevel.AutoSize = true;
+            this.lblJewelMaxLevel.Location = new System.Drawing.Point(243, 14);
+            this.lblJewelMaxLevel.Name = "lblJewelMaxLevel";
+            this.lblJewelMaxLevel.Size = new System.Drawing.Size(59, 13);
+            this.lblJewelMaxLevel.TabIndex = 39;
+            this.lblJewelMaxLevel.Text = "Max Level:";
+            // 
+            // nudJewelMaxLevel
+            // 
+            this.nudJewelMaxLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.nudJewelMaxLevel.ForeColor = System.Drawing.Color.Gainsboro;
+            this.nudJewelMaxLevel.Location = new System.Drawing.Point(246, 31);
+            this.nudJewelMaxLevel.Name = "nudJewelMaxLevel";
+            this.nudJewelMaxLevel.Size = new System.Drawing.Size(108, 20);
+            this.nudJewelMaxLevel.TabIndex = 38;
+            this.nudJewelMaxLevel.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nudJewelMaxLevel.ValueChanged += new System.EventHandler(this.nudJewelMaxLevel_ValueChanged);
+            // 
+            // btnExpGrid
+            // 
+            this.btnExpGrid.Location = new System.Drawing.Point(6, 184);
+            this.btnExpGrid.Margin = new System.Windows.Forms.Padding(2);
+            this.btnExpGrid.Name = "btnExpGrid";
+            this.btnExpGrid.Padding = new System.Windows.Forms.Padding(5);
+            this.btnExpGrid.Size = new System.Drawing.Size(111, 21);
+            this.btnExpGrid.TabIndex = 37;
+            this.btnExpGrid.Text = "Experience Grid";
+            // 
+            // nudBaseExp
+            // 
+            this.nudBaseExp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.nudBaseExp.ForeColor = System.Drawing.Color.Gainsboro;
+            this.nudBaseExp.Location = new System.Drawing.Point(7, 31);
+            this.nudBaseExp.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.nudBaseExp.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudBaseExp.Name = "nudBaseExp";
+            this.nudBaseExp.Size = new System.Drawing.Size(99, 20);
+            this.nudBaseExp.TabIndex = 36;
+            this.nudBaseExp.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudBaseExp.ValueChanged += new System.EventHandler(this.nudBaseExp_ValueChanged);
+            // 
+            // nudExpIncrease
+            // 
+            this.nudExpIncrease.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.nudExpIncrease.ForeColor = System.Drawing.Color.Gainsboro;
+            this.nudExpIncrease.Location = new System.Drawing.Point(115, 31);
+            this.nudExpIncrease.Name = "nudExpIncrease";
+            this.nudExpIncrease.Size = new System.Drawing.Size(103, 20);
+            this.nudExpIncrease.TabIndex = 31;
+            this.nudExpIncrease.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nudExpIncrease.ValueChanged += new System.EventHandler(this.nudExpIncrease_ValueChanged);
+            // 
+            // lblExpIncrease
+            // 
+            this.lblExpIncrease.AutoSize = true;
+            this.lblExpIncrease.Location = new System.Drawing.Point(112, 15);
+            this.lblExpIncrease.Name = "lblExpIncrease";
+            this.lblExpIncrease.Size = new System.Drawing.Size(125, 13);
+            this.lblExpIncrease.TabIndex = 21;
+            this.lblExpIncrease.Text = "Exp Increase (Per Lvl %):";
+            // 
+            // lblBaseExp
+            // 
+            this.lblBaseExp.AutoSize = true;
+            this.lblBaseExp.Location = new System.Drawing.Point(6, 16);
+            this.lblBaseExp.Name = "lblBaseExp";
+            this.lblBaseExp.Size = new System.Drawing.Size(100, 13);
+            this.lblBaseExp.TabIndex = 19;
+            this.lblBaseExp.Text = "Base Exp To Level:";
+            // 
+            // grpLevelBoosts
+            // 
+            this.grpLevelBoosts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.grpLevelBoosts.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.grpLevelBoosts.Controls.Add(this.nudHpIncrease);
+            this.grpLevelBoosts.Controls.Add(this.nudMpIncrease);
+            this.grpLevelBoosts.Controls.Add(this.nudBonusIncrease);
+            this.grpLevelBoosts.Controls.Add(this.nudMagicResistIncrease);
+            this.grpLevelBoosts.Controls.Add(this.nudSpeedIncrease);
+            this.grpLevelBoosts.Controls.Add(this.nudMagicIncrease);
+            this.grpLevelBoosts.Controls.Add(this.nudArmorIncrease);
+            this.grpLevelBoosts.Controls.Add(this.nudStrengthIncrease);
+            this.grpLevelBoosts.Controls.Add(this.rdoPercentageIncrease);
+            this.grpLevelBoosts.Controls.Add(this.rdoStaticIncrease);
+            this.grpLevelBoosts.Controls.Add(this.lblBonusIncrease);
+            this.grpLevelBoosts.Controls.Add(this.lblHpIncrease);
+            this.grpLevelBoosts.Controls.Add(this.lblMpIncrease);
+            this.grpLevelBoosts.Controls.Add(this.lblSpeedIncrease);
+            this.grpLevelBoosts.Controls.Add(this.lblStrengthIncrease);
+            this.grpLevelBoosts.Controls.Add(this.lblMagicResistIncrease);
+            this.grpLevelBoosts.Controls.Add(this.lblArmorIncrease);
+            this.grpLevelBoosts.Controls.Add(this.lblMagicIncrease);
+            this.grpLevelBoosts.ForeColor = System.Drawing.Color.Gainsboro;
+            this.grpLevelBoosts.Location = new System.Drawing.Point(9, 53);
+            this.grpLevelBoosts.Name = "grpLevelBoosts";
+            this.grpLevelBoosts.Size = new System.Drawing.Size(408, 117);
+            this.grpLevelBoosts.TabIndex = 23;
+            this.grpLevelBoosts.TabStop = false;
+            this.grpLevelBoosts.Text = "Level Up Boosts";
+            // 
+            // nudHpIncrease
+            // 
+            this.nudHpIncrease.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.nudHpIncrease.ForeColor = System.Drawing.Color.Gainsboro;
+            this.nudHpIncrease.Location = new System.Drawing.Point(11, 47);
+            this.nudHpIncrease.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudHpIncrease.Name = "nudHpIncrease";
+            this.nudHpIncrease.Size = new System.Drawing.Size(70, 20);
+            this.nudHpIncrease.TabIndex = 36;
+            this.nudHpIncrease.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nudHpIncrease.ValueChanged += new System.EventHandler(this.nudHpIncrease_ValueChanged);
+            // 
+            // nudMpIncrease
+            // 
+            this.nudMpIncrease.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.nudMpIncrease.ForeColor = System.Drawing.Color.Gainsboro;
+            this.nudMpIncrease.Location = new System.Drawing.Point(111, 47);
+            this.nudMpIncrease.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nudMpIncrease.Name = "nudMpIncrease";
+            this.nudMpIncrease.Size = new System.Drawing.Size(70, 20);
+            this.nudMpIncrease.TabIndex = 35;
+            this.nudMpIncrease.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nudMpIncrease.ValueChanged += new System.EventHandler(this.nudMpIncrease_ValueChanged);
+            // 
+            // nudBonusIncrease
+            // 
+            this.nudBonusIncrease.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.nudBonusIncrease.ForeColor = System.Drawing.Color.Gainsboro;
+            this.nudBonusIncrease.Location = new System.Drawing.Point(311, 90);
+            this.nudBonusIncrease.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudBonusIncrease.Name = "nudBonusIncrease";
+            this.nudBonusIncrease.Size = new System.Drawing.Size(70, 20);
+            this.nudBonusIncrease.TabIndex = 34;
+            this.nudBonusIncrease.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nudBonusIncrease.ValueChanged += new System.EventHandler(this.nudBonusIncrease_ValueChanged);
+            // 
+            // nudMagicResistIncrease
+            // 
+            this.nudMagicResistIncrease.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.nudMagicResistIncrease.ForeColor = System.Drawing.Color.Gainsboro;
+            this.nudMagicResistIncrease.Location = new System.Drawing.Point(311, 47);
+            this.nudMagicResistIncrease.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudMagicResistIncrease.Name = "nudMagicResistIncrease";
+            this.nudMagicResistIncrease.Size = new System.Drawing.Size(70, 20);
+            this.nudMagicResistIncrease.TabIndex = 33;
+            this.nudMagicResistIncrease.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nudMagicResistIncrease.ValueChanged += new System.EventHandler(this.nudMagicResistIncrease_ValueChanged);
+            // 
+            // nudSpeedIncrease
+            // 
+            this.nudSpeedIncrease.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.nudSpeedIncrease.ForeColor = System.Drawing.Color.Gainsboro;
+            this.nudSpeedIncrease.Location = new System.Drawing.Point(211, 90);
+            this.nudSpeedIncrease.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudSpeedIncrease.Name = "nudSpeedIncrease";
+            this.nudSpeedIncrease.Size = new System.Drawing.Size(70, 20);
+            this.nudSpeedIncrease.TabIndex = 32;
+            this.nudSpeedIncrease.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nudSpeedIncrease.ValueChanged += new System.EventHandler(this.nudSpeedIncrease_ValueChanged);
+            // 
+            // nudMagicIncrease
+            // 
+            this.nudMagicIncrease.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.nudMagicIncrease.ForeColor = System.Drawing.Color.Gainsboro;
+            this.nudMagicIncrease.Location = new System.Drawing.Point(111, 90);
+            this.nudMagicIncrease.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudMagicIncrease.Name = "nudMagicIncrease";
+            this.nudMagicIncrease.Size = new System.Drawing.Size(70, 20);
+            this.nudMagicIncrease.TabIndex = 31;
+            this.nudMagicIncrease.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nudMagicIncrease.ValueChanged += new System.EventHandler(this.nudMagicIncrease_ValueChanged);
+            // 
+            // nudArmorIncrease
+            // 
+            this.nudArmorIncrease.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.nudArmorIncrease.ForeColor = System.Drawing.Color.Gainsboro;
+            this.nudArmorIncrease.Location = new System.Drawing.Point(211, 47);
+            this.nudArmorIncrease.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudArmorIncrease.Name = "nudArmorIncrease";
+            this.nudArmorIncrease.Size = new System.Drawing.Size(70, 20);
+            this.nudArmorIncrease.TabIndex = 30;
+            this.nudArmorIncrease.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nudArmorIncrease.ValueChanged += new System.EventHandler(this.nudArmorIncrease_ValueChanged);
+            // 
+            // nudStrengthIncrease
+            // 
+            this.nudStrengthIncrease.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.nudStrengthIncrease.ForeColor = System.Drawing.Color.Gainsboro;
+            this.nudStrengthIncrease.Location = new System.Drawing.Point(11, 90);
+            this.nudStrengthIncrease.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudStrengthIncrease.Name = "nudStrengthIncrease";
+            this.nudStrengthIncrease.Size = new System.Drawing.Size(70, 20);
+            this.nudStrengthIncrease.TabIndex = 29;
+            this.nudStrengthIncrease.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nudStrengthIncrease.ValueChanged += new System.EventHandler(this.nudStrengthIncrease_ValueChanged);
+            // 
+            // rdoPercentageIncrease
+            // 
+            this.rdoPercentageIncrease.AutoSize = true;
+            this.rdoPercentageIncrease.Location = new System.Drawing.Point(66, 15);
+            this.rdoPercentageIncrease.Name = "rdoPercentageIncrease";
+            this.rdoPercentageIncrease.Size = new System.Drawing.Size(80, 17);
+            this.rdoPercentageIncrease.TabIndex = 1;
+            this.rdoPercentageIncrease.Text = "Percentage";
+            this.rdoPercentageIncrease.CheckedChanged += new System.EventHandler(this.rdoPercentageIncrease_CheckedChanged);
+            // 
+            // rdoStaticIncrease
+            // 
+            this.rdoStaticIncrease.AutoSize = true;
+            this.rdoStaticIncrease.Checked = true;
+            this.rdoStaticIncrease.Location = new System.Drawing.Point(7, 15);
+            this.rdoStaticIncrease.Name = "rdoStaticIncrease";
+            this.rdoStaticIncrease.Size = new System.Drawing.Size(52, 17);
+            this.rdoStaticIncrease.TabIndex = 0;
+            this.rdoStaticIncrease.TabStop = true;
+            this.rdoStaticIncrease.Text = "Static";
+            this.rdoStaticIncrease.CheckedChanged += new System.EventHandler(this.rdoStaticIncrease_CheckedChanged);
+            // 
+            // lblBonusIncrease
+            // 
+            this.lblBonusIncrease.AutoSize = true;
+            this.lblBonusIncrease.Location = new System.Drawing.Point(308, 77);
+            this.lblBonusIncrease.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBonusIncrease.Name = "lblBonusIncrease";
+            this.lblBonusIncrease.Size = new System.Drawing.Size(40, 13);
+            this.lblBonusIncrease.TabIndex = 18;
+            this.lblBonusIncrease.Text = "Bonus:";
+            // 
+            // lblHpIncrease
+            // 
+            this.lblHpIncrease.AutoSize = true;
+            this.lblHpIncrease.Location = new System.Drawing.Point(8, 31);
+            this.lblHpIncrease.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblHpIncrease.Name = "lblHpIncrease";
+            this.lblHpIncrease.Size = new System.Drawing.Size(48, 13);
+            this.lblHpIncrease.TabIndex = 14;
+            this.lblHpIncrease.Text = "Max HP:";
+            // 
+            // lblMpIncrease
+            // 
+            this.lblMpIncrease.AutoSize = true;
+            this.lblMpIncrease.Location = new System.Drawing.Point(111, 31);
+            this.lblMpIncrease.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMpIncrease.Name = "lblMpIncrease";
+            this.lblMpIncrease.Size = new System.Drawing.Size(49, 13);
+            this.lblMpIncrease.TabIndex = 15;
+            this.lblMpIncrease.Text = "Max MP:";
+            // 
+            // lblSpeedIncrease
+            // 
+            this.lblSpeedIncrease.AutoSize = true;
+            this.lblSpeedIncrease.Location = new System.Drawing.Point(208, 77);
+            this.lblSpeedIncrease.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSpeedIncrease.Name = "lblSpeedIncrease";
+            this.lblSpeedIncrease.Size = new System.Drawing.Size(71, 13);
+            this.lblSpeedIncrease.TabIndex = 9;
+            this.lblSpeedIncrease.Text = "Move Speed:";
+            // 
+            // lblStrengthIncrease
+            // 
+            this.lblStrengthIncrease.AutoSize = true;
+            this.lblStrengthIncrease.Location = new System.Drawing.Point(8, 77);
+            this.lblStrengthIncrease.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblStrengthIncrease.Name = "lblStrengthIncrease";
+            this.lblStrengthIncrease.Size = new System.Drawing.Size(50, 13);
+            this.lblStrengthIncrease.TabIndex = 5;
+            this.lblStrengthIncrease.Text = "Strength:";
+            // 
+            // lblMagicResistIncrease
+            // 
+            this.lblMagicResistIncrease.AutoSize = true;
+            this.lblMagicResistIncrease.Location = new System.Drawing.Point(308, 31);
+            this.lblMagicResistIncrease.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMagicResistIncrease.Name = "lblMagicResistIncrease";
+            this.lblMagicResistIncrease.Size = new System.Drawing.Size(71, 13);
+            this.lblMagicResistIncrease.TabIndex = 8;
+            this.lblMagicResistIncrease.Text = "Magic Resist:";
+            // 
+            // lblArmorIncrease
+            // 
+            this.lblArmorIncrease.AutoSize = true;
+            this.lblArmorIncrease.Location = new System.Drawing.Point(208, 31);
+            this.lblArmorIncrease.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblArmorIncrease.Name = "lblArmorIncrease";
+            this.lblArmorIncrease.Size = new System.Drawing.Size(37, 13);
+            this.lblArmorIncrease.TabIndex = 7;
+            this.lblArmorIncrease.Text = "Armor:";
+            // 
+            // lblMagicIncrease
+            // 
+            this.lblMagicIncrease.AutoSize = true;
+            this.lblMagicIncrease.Location = new System.Drawing.Point(108, 77);
+            this.lblMagicIncrease.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMagicIncrease.Name = "lblMagicIncrease";
+            this.lblMagicIncrease.Size = new System.Drawing.Size(39, 13);
+            this.lblMagicIncrease.TabIndex = 6;
+            this.lblMagicIncrease.Text = "Magic:";
             // 
             // grpAdditionalWeaponProps
             // 
@@ -1360,6 +1833,7 @@ namespace Intersect.Editor.Forms.Editors
             // 
             this.grpHelmetPaperdollProps.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.grpHelmetPaperdollProps.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.grpHelmetPaperdollProps.Controls.Add(this.grpJewelProperties);
             this.grpHelmetPaperdollProps.Controls.Add(this.chkHelmHideExtra);
             this.grpHelmetPaperdollProps.Controls.Add(this.chkHelmHideBeard);
             this.grpHelmetPaperdollProps.Controls.Add(this.chkHelmHideHair);
@@ -1371,6 +1845,51 @@ namespace Intersect.Editor.Forms.Editors
             this.grpHelmetPaperdollProps.TabStop = false;
             this.grpHelmetPaperdollProps.Text = "Paperdoll Properties";
             this.grpHelmetPaperdollProps.Visible = false;
+            // 
+            // grpJewelProperties
+            // 
+            this.grpJewelProperties.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.grpJewelProperties.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
+            this.grpJewelProperties.Controls.Add(this.nudSlotsRequired);
+            this.grpJewelProperties.Controls.Add(this.lblSlotsRequired);
+            this.grpJewelProperties.ForeColor = System.Drawing.Color.Gainsboro;
+            this.grpJewelProperties.Location = new System.Drawing.Point(2, -1);
+            this.grpJewelProperties.Name = "grpJewelProperties";
+            this.grpJewelProperties.Size = new System.Drawing.Size(207, 110);
+            this.grpJewelProperties.TabIndex = 104;
+            this.grpJewelProperties.TabStop = false;
+            this.grpJewelProperties.Text = "Jewel Properties";
+            this.grpJewelProperties.Visible = false;
+            // 
+            // nudSlotsRequired
+            // 
+            this.nudSlotsRequired.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
+            this.nudSlotsRequired.ForeColor = System.Drawing.Color.Gainsboro;
+            this.nudSlotsRequired.Location = new System.Drawing.Point(13, 41);
+            this.nudSlotsRequired.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nudSlotsRequired.Name = "nudSlotsRequired";
+            this.nudSlotsRequired.Size = new System.Drawing.Size(180, 20);
+            this.nudSlotsRequired.TabIndex = 59;
+            this.nudSlotsRequired.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.nudSlotsRequired.ValueChanged += new System.EventHandler(this.nudSlotsRequired_ValueChanged);
+            // 
+            // lblSlotsRequired
+            // 
+            this.lblSlotsRequired.AutoSize = true;
+            this.lblSlotsRequired.Location = new System.Drawing.Point(9, 20);
+            this.lblSlotsRequired.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSlotsRequired.Name = "lblSlotsRequired";
+            this.lblSlotsRequired.Size = new System.Drawing.Size(79, 13);
+            this.lblSlotsRequired.TabIndex = 110;
+            this.lblSlotsRequired.Text = "Slots Required:";
             // 
             // chkHelmHideExtra
             // 
@@ -3249,27 +3768,6 @@ namespace Intersect.Editor.Forms.Editors
             this.toolStripItemUndo.Text = "Undo";
             this.toolStripItemUndo.Click += new System.EventHandler(this.toolStripItemUndo_Click);
             // 
-            // lstDrops
-            // 
-            this.lstDrops.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
-            this.lstDrops.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lstDrops.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lstDrops.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lstDrops.FormattingEnabled = true;
-            this.lstDrops.Location = new System.Drawing.Point(262, 441);
-            this.lstDrops.Name = "lstDrops";
-            this.lstDrops.Size = new System.Drawing.Size(171, 80);
-            this.lstDrops.TabIndex = 107;
-            // 
-            // lblDrops
-            // 
-            this.lblDrops.AutoSize = true;
-            this.lblDrops.Location = new System.Drawing.Point(259, 425);
-            this.lblDrops.Name = "lblDrops";
-            this.lblDrops.Size = new System.Drawing.Size(104, 13);
-            this.lblDrops.TabIndex = 108;
-            this.lblDrops.Text = "NPCs that Drop This";
-            // 
             // FrmItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3313,11 +3811,29 @@ namespace Intersect.Editor.Forms.Editors
             ((System.ComponentModel.ISupportInitialize)(this.picItem)).EndInit();
             this.grpEquipment.ResumeLayout(false);
             this.grpEquipment.PerformLayout();
+            this.grpJewelLeveling.ResumeLayout(false);
+            this.grpJewelLeveling.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudJewelMaxLevel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBaseExp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudExpIncrease)).EndInit();
+            this.grpLevelBoosts.ResumeLayout(false);
+            this.grpLevelBoosts.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHpIncrease)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMpIncrease)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBonusIncrease)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMagicResistIncrease)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpeedIncrease)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMagicIncrease)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudArmorIncrease)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStrengthIncrease)).EndInit();
             this.grpAdditionalWeaponProps.ResumeLayout(false);
             this.grpAdditionalWeaponProps.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBackstabMultiplier)).EndInit();
             this.grpHelmetPaperdollProps.ResumeLayout(false);
             this.grpHelmetPaperdollProps.PerformLayout();
+            this.grpJewelProperties.ResumeLayout(false);
+            this.grpJewelProperties.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSlotsRequired)).EndInit();
             this.grpPrayerProperties.ResumeLayout(false);
             this.grpPrayerProperties.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudComboExpBoost)).EndInit();
@@ -3585,5 +4101,35 @@ namespace Intersect.Editor.Forms.Editors
         private DarkNumericUpDown nudBackstabMultiplier;
         private ListBox lstDrops;
         private Label lblDrops;
+        private DarkGroupBox grpJewelLeveling;
+        private Label lblJewelMaxLevel;
+        private DarkNumericUpDown nudJewelMaxLevel;
+        private DarkButton btnExpGrid;
+        private DarkNumericUpDown nudBaseExp;
+        private DarkNumericUpDown nudExpIncrease;
+        private Label lblExpIncrease;
+        private Label lblBaseExp;
+        private DarkGroupBox grpLevelBoosts;
+        private DarkNumericUpDown nudHpIncrease;
+        private DarkNumericUpDown nudMpIncrease;
+        private DarkNumericUpDown nudBonusIncrease;
+        private DarkNumericUpDown nudMagicResistIncrease;
+        private DarkNumericUpDown nudSpeedIncrease;
+        private DarkNumericUpDown nudMagicIncrease;
+        private DarkNumericUpDown nudArmorIncrease;
+        private DarkNumericUpDown nudStrengthIncrease;
+        private DarkRadioButton rdoPercentageIncrease;
+        private DarkRadioButton rdoStaticIncrease;
+        private Label lblBonusIncrease;
+        private Label lblHpIncrease;
+        private Label lblMpIncrease;
+        private Label lblSpeedIncrease;
+        private Label lblStrengthIncrease;
+        private Label lblMagicResistIncrease;
+        private Label lblArmorIncrease;
+        private Label lblMagicIncrease;
+        private DarkGroupBox grpJewelProperties;
+        private DarkNumericUpDown nudSlotsRequired;
+        private Label lblSlotsRequired;
     }
 }

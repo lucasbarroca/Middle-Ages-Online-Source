@@ -569,6 +569,12 @@ namespace Intersect.Editor.Forms.Editors
             else if (cmbType.SelectedIndex == (int) ItemTypes.Equipment)
             {
                 grpEquipment.Visible = true;
+                cmbEquipmentAnimation.Visible = true;
+                lblEquipmentAnimation.Visible = true;
+                lblEquipmentSlot.Visible = true;
+                cmbEquipmentSlot.Visible = true;
+                grpAdditionalWeaponProps.Visible = true;
+                grpJewelLeveling.Visible = false;
                 if (mEditorItem.EquipmentSlot < -1 || mEditorItem.EquipmentSlot >= cmbEquipmentSlot.Items.Count)
                 {
                     mEditorItem.EquipmentSlot = 0;
@@ -597,6 +603,19 @@ namespace Intersect.Editor.Forms.Editors
                 // Whether this item type is stackable is not up for debate.
                 chkStackable.Checked = true;
                 chkStackable.Enabled = false;
+            }
+            else if (cmbType.SelectedIndex == (int)ItemTypes.Jewel)
+            {
+                grpEquipment.Visible = true;
+                grpAdditionalWeaponProps.Visible = false;
+                cmbEquipmentAnimation.Visible = false;
+                lblEquipmentAnimation.Visible = false;
+                lblEquipmentSlot.Visible = false;
+                cmbEquipmentSlot.Visible = false;
+
+                cmbEquipmentBonus.SelectedIndex = (int)mEditorItem.Effect.Type;
+
+                grpJewelLeveling.Show();
             }
 
             mEditorItem.ItemType = (ItemTypes) cmbType.SelectedIndex;
@@ -1535,6 +1554,76 @@ namespace Intersect.Editor.Forms.Editors
         private void nudBackstabMultiplier_ValueChanged(object sender, EventArgs e)
         {
             mEditorItem.BackstabMultiplier = (float) nudBackstabMultiplier.Value;
+        }
+
+        private void nudBaseExp_ValueChanged(object sender, EventArgs e)
+        {
+            mEditorItem.BaseExp = (int)nudBaseExp.Value;
+        }
+
+        private void nudExpIncrease_ValueChanged(object sender, EventArgs e)
+        {
+            mEditorItem.ExpIncrease = (int)nudExpIncrease.Value;
+        }
+
+        private void nudJewelMaxLevel_ValueChanged(object sender, EventArgs e)
+        {
+            mEditorItem.MaxLevel = (int)nudJewelMaxLevel.Value;
+        }
+
+        private void rdoStaticIncrease_CheckedChanged(object sender, EventArgs e)
+        {
+            mEditorItem.IncreasePercentage = rdoPercentageIncrease.Checked;
+        }
+
+        private void rdoPercentageIncrease_CheckedChanged(object sender, EventArgs e)
+        {
+            mEditorItem.IncreasePercentage = rdoPercentageIncrease.Checked;
+        }
+
+        private void nudHpIncrease_ValueChanged(object sender, EventArgs e)
+        {
+            mEditorItem.VitalIncrease[(int)Vitals.Health] = (int)nudHpIncrease.Value;
+        }
+
+        private void nudMpIncrease_ValueChanged(object sender, EventArgs e)
+        {
+            mEditorItem.VitalIncrease[(int)Vitals.Mana] = (int)nudMpIncrease.Value;
+        }
+
+        private void nudArmorIncrease_ValueChanged(object sender, EventArgs e)
+        {
+            mEditorItem.StatIncrease[(int)Stats.Defense] = (int)nudArmorIncrease.Value;
+        }
+
+        private void nudMagicResistIncrease_ValueChanged(object sender, EventArgs e)
+        {
+            mEditorItem.StatIncrease[(int)Stats.MagicResist] = (int)nudMagicResistIncrease.Value;
+        }
+
+        private void nudStrengthIncrease_ValueChanged(object sender, EventArgs e)
+        {
+            mEditorItem.StatIncrease[(int)Stats.Attack] = (int)nudMagicResistIncrease.Value;
+        }
+
+        private void nudMagicIncrease_ValueChanged(object sender, EventArgs e)
+        {
+            mEditorItem.StatIncrease[(int)Stats.AbilityPower] = (int)nudMagicResistIncrease.Value;
+        }
+
+        private void nudSpeedIncrease_ValueChanged(object sender, EventArgs e)
+        {
+            mEditorItem.StatIncrease[(int)Stats.Speed] = (int)nudMagicResistIncrease.Value;
+        }
+
+        private void nudBonusIncrease_ValueChanged(object sender, EventArgs e)
+        {
+            mEditorItem.BonusIncrease = (int)nudBonusIncrease.Value;
+        }
+
+        private void nudSlotsRequired_ValueChanged(object sender, EventArgs e)
+        {
+            mEditorItem.SlotsRequired = (int) nudSlotsRequired.Value;
         }
     }
 }
