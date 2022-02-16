@@ -481,6 +481,11 @@ namespace Intersect.GameObjects
             return Lookup.Where(i => ((ItemBase)i.Value).CooldownGroup.Trim() == cooldownGroup).Select(i => (ItemBase)i.Value).ToArray();
         }
 
+        public long ExperienceToNextLevel(int level)
+        {
+            return ExperienceCurve.Calculate(level);
+        }
+
         /// <summary>
         /// Gets all of the tags that have been created for all items in our collection
         /// </summary>

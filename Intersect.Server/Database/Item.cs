@@ -88,10 +88,8 @@ namespace Intersect.Server.Database
         [NotMapped]
         public int[] StatBuffs { get; set; } = new int[(int) Stats.StatCount];
 
-        [NotMapped]
         public long Exp { get; set; } = 0;
         
-        [NotMapped]
         public int Level { get; set; } = 1;
 
         [JsonIgnore]
@@ -104,6 +102,8 @@ namespace Intersect.Server.Database
         {
             ItemId = item.ItemId;
             Quantity = item.Quantity;
+            Level = item.Level;
+            Exp = item.Exp;
             BagId = item.BagId;
             Bag = item.Bag;
             for (var i = 0; i < (int) Stats.StatCount; i++)
@@ -145,6 +145,21 @@ namespace Intersect.Server.Database
             }
 
             return default != bag;
+        }
+
+        private long GetExperienceToNextLevel(int level)
+        {
+            if (level > ItemBase.Get(ItemId).MaxLevel)
+            {
+                Level = ItemBase.Get(ItemId).MaxLevel;
+            }
+            if (level >= ItemBase.Get(ItemId).MaxLevel)
+            {
+                return -1;
+            }
+            var itemBase = ItemBase.Get(ItemId);
+
+            return itemBase?.ExperienceToNextLevel(level) ?? ItemBase.DEFAULT_BASE_EXPERIENCE;
         }
 
     }

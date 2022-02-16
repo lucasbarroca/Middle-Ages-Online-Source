@@ -866,7 +866,7 @@ namespace Intersect.Client.Interface.Game.DescriptionWindows
             // Add a row component.
             var rows = AddRowContainer();
 
-            rows.AddKeyValueRow(Strings.ItemDescription.JewelExp, Strings.ItemDescription.JewelExpGained.ToString(mExp, "0"));
+            rows.AddKeyValueRow(Strings.ItemDescription.JewelExp, Strings.ItemDescription.JewelExpGained.ToString(mExp, mItem.ExperienceToNextLevel(mLevel)));
             rows.AddKeyValueRow(Strings.ItemDescription.JewelLevel, Strings.ItemDescription.LevelStatus.ToString(mLevel, mItem.MaxLevel));
 
             // Resize and position the container.

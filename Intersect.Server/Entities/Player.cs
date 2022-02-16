@@ -1256,10 +1256,35 @@ namespace Intersect.Server.Entities
                         Exp += ComboExp;
                     }
 
-                    Exp += (int)(amount * GetEquipmentBonusEffect(EffectType.EXP, 100) / 100);
+                    var expRewarded = (int)(amount * GetEquipmentBonusEffect(EffectType.EXP, 100) / 100);
+
+                    Exp += expRewarded;
                     if (Exp < 0)
                     {
                         Exp = 0;
+                    }
+
+                    var updateSlots = new List<int>();
+                    foreach (var invItem in Items)
+                    {
+                        var itemBase = ItemBase.Get(invItem.ItemId);
+                        if (itemBase != null && itemBase.ItemType == ItemTypes.Jewel)
+                        {
+                            if (invItem.Level != itemBase.MaxLevel)
+                            {
+                                if (invItem.Exp < 0)
+                                {
+                                    invItem.Exp = 0;
+                                }
+                                invItem.Exp += expRewarded + ComboExp;
+                                invItem.Set(invItem);
+                                updateSlots.Add(invItem.Slot);
+                            }
+                        }
+                    }
+                    foreach (var slot in updateSlots)
+                    {
+                        PacketSender.SendInventoryItemUpdate(this, slot);
                     }
 
                     if (!CheckLevelUp())
