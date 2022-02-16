@@ -157,7 +157,7 @@ namespace Intersect.Client.Interface.Game.Inventory
                 {
                     mDescWindow = new ItemDescriptionWindow(
                         Globals.Me.Inventory[mMySlot].Base, Globals.Me.Inventory[mMySlot].Quantity, mInventoryWindow.X,
-                        mInventoryWindow.Y, Globals.Me.Inventory[mMySlot].StatBuffs
+                        mInventoryWindow.Y, Globals.Me.Inventory[mMySlot].StatBuffs, Globals.Me.Inventory[mMySlot].Exp, Globals.Me.Inventory[mMySlot].Level
                     );
                 }
             }
@@ -177,8 +177,9 @@ namespace Intersect.Client.Interface.Game.Inventory
                         {
                             mDescWindow = new ItemDescriptionWindow(
                                 Globals.Me.Inventory[mMySlot].Base, Globals.Me.Inventory[mMySlot].Quantity,
-                                mInventoryWindow.X, mInventoryWindow.Y, Globals.Me.Inventory[mMySlot].StatBuffs, "",
-                                Strings.Shop.sellsfor.ToString(buysFor.CostItemQuantity, hoveredItem.Name)
+                                mInventoryWindow.X, mInventoryWindow.Y, Globals.Me.Inventory[mMySlot].StatBuffs,
+                                Globals.Me.Inventory[mMySlot].Exp, Globals.Me.Inventory[mMySlot].Level,
+                                "", Strings.Shop.sellsfor.ToString(buysFor.CostItemQuantity, hoveredItem.Name)
                             );
                         }
                     }
@@ -189,8 +190,9 @@ namespace Intersect.Client.Interface.Game.Inventory
                         {
                             mDescWindow = new ItemDescriptionWindow(
                                 Globals.Me.Inventory[mMySlot].Base, Globals.Me.Inventory[mMySlot].Quantity,
-                                mInventoryWindow.X, mInventoryWindow.Y, Globals.Me.Inventory[mMySlot].StatBuffs, "",
-                                Strings.Shop.sellsfor.ToString((int) Math.Floor(invItem.Base.Price * Globals.GameShop.BuyMultiplier), costItem.Name)
+                                mInventoryWindow.X, mInventoryWindow.Y, Globals.Me.Inventory[mMySlot].StatBuffs,
+                                Globals.Me.Inventory[mMySlot].Exp, Globals.Me.Inventory[mMySlot].Level,
+                                "", Strings.Shop.sellsfor.ToString((int) Math.Floor(invItem.Base.Price * Globals.GameShop.BuyMultiplier), costItem.Name)
                             );
                         }
                     }
@@ -199,7 +201,7 @@ namespace Intersect.Client.Interface.Game.Inventory
                 {
                     mDescWindow = new ItemDescriptionWindow(
                         invItem.Base, invItem.Quantity, mInventoryWindow.X, mInventoryWindow.Y, invItem.StatBuffs,
-                        "", Strings.Shop.wontbuy
+                        invItem.Exp, invItem.Level, "", Strings.Shop.wontbuy
                     );
                 }
             }

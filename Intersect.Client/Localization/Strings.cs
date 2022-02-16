@@ -1099,6 +1099,7 @@ namespace Intersect.Client.Localization
                 {4, @"Spell"},
                 {5, @"Special"},
                 {6, @"Bag"},
+                {7, @"Jewel"},
             };
 
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
@@ -1159,6 +1160,18 @@ namespace Intersect.Client.Localization
 
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public static LocalizedString RestrictionOr = @"OR {00}";
+
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public static LocalizedString JewelExp = @"Exp:";
+
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public static LocalizedString JewelExpGained = @"{00} / {01}";
+
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public static LocalizedString JewelLevel = @"Level:";
+
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public static LocalizedString LevelStatus = @"{00} / {01}";
         }
 
         public struct Keys

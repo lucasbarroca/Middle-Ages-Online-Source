@@ -26,6 +26,10 @@ namespace Intersect.Client.Interface.Game.Character
         private ItemDescriptionWindow mDescWindow;
 
         private int[] mStatBoost = new int[(int) Enums.Stats.StatCount];
+        
+        private long mExp;
+        
+        private int mLevel;
 
         private bool mTexLoaded;
 
@@ -88,7 +92,7 @@ namespace Intersect.Client.Interface.Game.Character
                 return;
             }
 
-            mDescWindow = new ItemDescriptionWindow(item, 1, mCharacterWindow.X, mCharacterWindow.Y, mStatBoost, item.Name);
+            mDescWindow = new ItemDescriptionWindow(item, 1, mCharacterWindow.X, mCharacterWindow.Y, mStatBoost, mExp, mLevel, item.Name);
         }
 
         public FloatRect RenderBounds()
@@ -104,12 +108,14 @@ namespace Intersect.Client.Interface.Game.Character
             return rect;
         }
 
-        public void Update(Guid currentItemId, int[] statBoost)
+        public void Update(Guid currentItemId, int[] statBoost, long exp, int level)
         {
             if (currentItemId != mCurrentItemId || !mTexLoaded)
             {
                 mCurrentItemId = currentItemId;
                 mStatBoost = statBoost;
+                mExp = exp;
+                mLevel = level;
                 var item = ItemBase.Get(mCurrentItemId);
                 if (item != null)
                 {

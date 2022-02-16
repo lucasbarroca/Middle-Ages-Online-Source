@@ -121,7 +121,7 @@ namespace Intersect.Client.Interface.Game.Bank
             {
                 mDescWindow = new ItemDescriptionWindow(
                     Globals.Bank[mMySlot].Base, Globals.Bank[mMySlot].Quantity, mBankWindow.X, mBankWindow.Y,
-                    Globals.Bank[mMySlot].StatBuffs
+                    Globals.Bank[mMySlot].StatBuffs, Globals.Bank[mMySlot].Exp, Globals.Bank[mMySlot].Level
                 );
             }
         }

@@ -22,7 +22,7 @@ namespace Intersect.Client.Items
         {
         }
 
-        public MapItemInstance(int tileIndex, Guid uniqueId, Guid itemId, Guid? bagId, int quantity, int[] statbuffs) : base()
+        public MapItemInstance(int tileIndex, Guid uniqueId, Guid itemId, Guid? bagId, int quantity, int[] statbuffs, long exp, int level) : base()
         {
             UniqueId = uniqueId;
             X = tileIndex % Options.MapWidth;
@@ -31,6 +31,8 @@ namespace Intersect.Client.Items
             BagId = bagId;
             Quantity = quantity;
             StatBuffs = statbuffs;
+            Exp = exp;
+            Level = level;
         }
 
     }

@@ -48,7 +48,7 @@ namespace Intersect.Server.Entities
                     items.Add(
                         new BankUpdatePacket(
                             slot, mBank[slot].ItemId, mBank[slot].Quantity, mBank[slot].BagId,
-                            mBank[slot].StatBuffs
+                            mBank[slot].StatBuffs, mBank[slot].Exp, mBank[slot].Level
                         )
                     );
                     var item = ItemBase.Get(mBank[slot].ItemId);
@@ -56,7 +56,7 @@ namespace Intersect.Server.Entities
                 }
                 else
                 {
-                    items.Add(new BankUpdatePacket(slot, Guid.Empty, 0, null, null));
+                    items.Add(new BankUpdatePacket(slot, Guid.Empty, 0, null, null, 0, 0));
                 }
             }
 
@@ -77,13 +77,13 @@ namespace Intersect.Server.Entities
                 mPlayer?.SendPacket(
                     new BankUpdatePacket(
                         slot, mBank[slot].ItemId, mBank[slot].Quantity, mBank[slot].BagId,
-                        mBank[slot].StatBuffs
+                        mBank[slot].StatBuffs, mBank[slot].Exp, mBank[slot].Level
                     )
                 );
             }
             else
             {
-                mPlayer?.SendPacket(new BankUpdatePacket(slot, Guid.Empty, 0, null, null));
+                mPlayer?.SendPacket(new BankUpdatePacket(slot, Guid.Empty, 0, null, null, 0, 0));
             }
 
             var oldValue = mBankValue;

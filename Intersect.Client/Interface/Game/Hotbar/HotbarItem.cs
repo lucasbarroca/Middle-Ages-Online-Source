@@ -181,9 +181,17 @@ namespace Intersect.Client.Interface.Game.Hotbar
                     mItemDescWindow = null;
                 }
 
+                var exp = 0L;
+                var level = 0;
+                if (mInventoryItem != null)
+                {
+                    exp = mInventoryItem.Exp;
+                    level = mInventoryItem.Level;
+                }
+
                 mItemDescWindow = new ItemDescriptionWindow(
                     mCurrentItem, 1, mHotbarWindow.X + Pnl.X + 16, mHotbarWindow.Y + mHotbarWindow.Height + 2,
-                    mInventoryItem?.StatBuffs, mCurrentItem.Name, ""
+                    mInventoryItem?.StatBuffs, exp, level, mCurrentItem.Name, ""
                 );
             }
             else if (mCurrentSpell != null)

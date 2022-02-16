@@ -16,6 +16,10 @@ namespace Intersect.Client.Interface.Game.DescriptionWindows
         protected int mAmount;
 
         protected int[] mStatBuffs;
+        
+        protected long mExp;
+        
+        protected int mLevel;
 
         protected string mTitleOverride;
 
@@ -29,6 +33,8 @@ namespace Intersect.Client.Interface.Game.DescriptionWindows
             int x,
             int y,
             int[] statBuffs,
+            long exp, 
+            int level,
             string titleOverride = "",
             string valueLabel = ""
         ) : base(Interface.GameUi.GameCanvas, "DescriptionWindow")
@@ -36,6 +42,8 @@ namespace Intersect.Client.Interface.Game.DescriptionWindows
             mItem = item;
             mAmount = amount;
             mStatBuffs = statBuffs;
+            mExp = exp;
+            mLevel = level;
             mTitleOverride = titleOverride;
             mValueLabel = valueLabel;
 
@@ -96,6 +104,9 @@ namespace Intersect.Client.Interface.Game.DescriptionWindows
 
                 case ItemTypes.Bag:
                     SetupBagInfo();
+                    break;
+                case ItemTypes.Jewel:
+                    SetupJewelInfo();
                     break;
             }
 
@@ -845,6 +856,21 @@ namespace Intersect.Client.Interface.Game.DescriptionWindows
                 // Resize and position the container.
                 rows.SizeToChildren(true, true);
             }
+        }
+
+        protected void SetupJewelInfo()
+        {
+            // Add a divider.
+            AddDivider();
+
+            // Add a row component.
+            var rows = AddRowContainer();
+
+            rows.AddKeyValueRow(Strings.ItemDescription.JewelExp, Strings.ItemDescription.JewelExpGained.ToString(mExp, "0"));
+            rows.AddKeyValueRow(Strings.ItemDescription.JewelLevel, Strings.ItemDescription.LevelStatus.ToString(mLevel, mItem.MaxLevel));
+
+            // Resize and position the container.
+            rows.SizeToChildren(true, true);
         }
 
         protected void SetupRestrictionInfo()

@@ -88,6 +88,12 @@ namespace Intersect.Server.Database
         [NotMapped]
         public int[] StatBuffs { get; set; } = new int[(int) Stats.StatCount];
 
+        [NotMapped]
+        public long Exp { get; set; } = 0;
+        
+        [NotMapped]
+        public int Level { get; set; } = 1;
+
         [JsonIgnore]
         [NotMapped]
         public ItemBase Descriptor => ItemBase.Get(ItemId);

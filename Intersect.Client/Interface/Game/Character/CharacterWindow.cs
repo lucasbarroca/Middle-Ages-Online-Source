@@ -391,17 +391,19 @@ namespace Intersect.Client.Interface.Game.Character
                         Items[i]
                             .Update(
                                 Globals.Me.Inventory[Globals.Me.MyEquipment[i]].ItemId,
-                                Globals.Me.Inventory[Globals.Me.MyEquipment[i]].StatBuffs
+                                Globals.Me.Inventory[Globals.Me.MyEquipment[i]].StatBuffs,
+                                Globals.Me.Inventory[Globals.Me.MyEquipment[i]].Exp,
+                                Globals.Me.Inventory[Globals.Me.MyEquipment[i]].Level
                             );
                     }
                     else
                     {
-                        Items[i].Update(Guid.Empty, mEmptyStatBoost);
+                        Items[i].Update(Guid.Empty, mEmptyStatBoost, 0, 0);
                     }
                 }
                 else
                 {
-                    Items[i].Update(Guid.Empty, mEmptyStatBoost);
+                    Items[i].Update(Guid.Empty, mEmptyStatBoost, 0, 0);
                 }
             }
         }
