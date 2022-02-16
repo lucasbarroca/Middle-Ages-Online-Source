@@ -530,7 +530,7 @@ namespace Intersect.Editor.Forms.Editors
                 rdoPercentageIncrease.Checked = mEditorItem.IncreasePercentage;
                 rdoStaticIncrease.Checked = !mEditorItem.IncreasePercentage;
                 UpdateIncreases();
-                UpdateExpGridValues(1);
+                ExpGridReset();
 
                 if (mChanged.IndexOf(mEditorItem) == -1)
                 {
@@ -642,7 +642,6 @@ namespace Intersect.Editor.Forms.Editors
                 lblEquipmentSlot.Visible = false;
                 cmbEquipmentSlot.Visible = false;
                 expGrid.Visible = true;
-                UpdateExpGridValues(1);
 
                 cmbEquipmentBonus.SelectedIndex = (int)mEditorItem.Effect.Type;
 
@@ -1735,6 +1734,12 @@ namespace Intersect.Editor.Forms.Editors
             );
 
             nudBonusIncrease.Value = mEditorItem.BonusIncrease;
+        }
+
+        private void ExpGridReset()
+        {
+            grpExpGrid.Hide();
+            expGrid.Rows.Clear();
         }
 
         private void btnExpGrid_Click(object sender, EventArgs e)

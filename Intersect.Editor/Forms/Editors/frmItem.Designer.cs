@@ -1810,7 +1810,7 @@ namespace Intersect.Editor.Forms.Editors
             this.nudBaseExp.ForeColor = System.Drawing.Color.Gainsboro;
             this.nudBaseExp.Location = new System.Drawing.Point(7, 31);
             this.nudBaseExp.Maximum = new decimal(new int[] {
-            100000,
+            10000000,
             0,
             0,
             0});
@@ -1834,6 +1834,11 @@ namespace Intersect.Editor.Forms.Editors
             this.nudExpIncrease.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
             this.nudExpIncrease.ForeColor = System.Drawing.Color.Gainsboro;
             this.nudExpIncrease.Location = new System.Drawing.Point(115, 31);
+            this.nudExpIncrease.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.nudExpIncrease.Name = "nudExpIncrease";
             this.nudExpIncrease.Size = new System.Drawing.Size(103, 20);
             this.nudExpIncrease.TabIndex = 31;
