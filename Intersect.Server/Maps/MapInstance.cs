@@ -15,6 +15,8 @@ using Intersect.Server.Networking;
 using Intersect.Utilities;
 using Intersect.Server.Entities;
 using Intersect.Server.Classes.Maps;
+using Intersect.GameObjects.Switches_and_Variables;
+using Intersect.Server.Core;
 
 namespace Intersect.Server.Maps
 {
@@ -1446,6 +1448,32 @@ namespace Intersect.Server.Maps
             mEntityMovements.SendPackets(nearbyPlayers);
             mActionMessages.SendPackets(nearbyPlayers);
             mMapAnimations.SendPackets(nearbyPlayers);
+        }
+        #endregion
+
+        #region Instance Variables
+        public VariableValue GetInstanceVariable(Guid variableId)
+        {
+            if (ProcessingInfo.InstanceVariables.TryGetValue(MapInstanceId, out var instanceVariables) && instanceVariables.TryGetValue(variableId, out var instanceVariable))
+            {
+                return instanceVariable;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public void SetInstanceVariable(Guid variableId, VariableValue value)
+        {
+            if (ProcessingInfo.InstanceVariables.TryGetValue(MapInstanceId, out var instanceVariables) && instanceVariables.ContainsKey(variableId))
+            {
+                instanceVariables[variableId] = value;
+            }
+            else
+            {
+                Log.Error($"Failed to set value for instance variable {variableId} in instance {MapInstanceId}");
+            }
         }
         #endregion
     }

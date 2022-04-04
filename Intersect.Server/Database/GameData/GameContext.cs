@@ -8,6 +8,7 @@ using Intersect.GameObjects;
 using Intersect.GameObjects.Crafting;
 using Intersect.GameObjects.Events;
 using Intersect.GameObjects.Maps.MapList;
+using Intersect.GameObjects.Switches_and_Variables;
 using Intersect.Server.Database.GameData.Migrations;
 using Intersect.Server.Maps;
 
@@ -86,6 +87,8 @@ namespace Intersect.Server.Database.GameData
         public DbSet<ServerVariableBase> ServerVariables { get; set; }
 
         public DbSet<GuildVariableBase> GuildVariables { get; set; }
+
+        public DbSet<InstanceVariableBase> InstanceVariables { get; set; }
 
         //Tilesets
         public DbSet<TilesetBase> Tilesets { get; set; }

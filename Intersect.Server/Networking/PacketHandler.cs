@@ -5,6 +5,7 @@ using Intersect.GameObjects.Crafting;
 using Intersect.GameObjects.Events;
 using Intersect.GameObjects.Maps;
 using Intersect.GameObjects.Maps.MapList;
+using Intersect.GameObjects.Switches_and_Variables;
 using Intersect.Logging;
 using Intersect.Models;
 using Intersect.Network;
@@ -3697,6 +3698,11 @@ namespace Intersect.Server.Networking
 
                     break;
 
+                case GameObjectType.InstanceVariable:
+                    obj = InstanceVariableBase.Get(id);
+
+                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -3821,6 +3827,11 @@ namespace Intersect.Server.Networking
 
                     break;
 
+                case GameObjectType.InstanceVariable:
+                    obj = InstanceVariableBase.Get(id);
+
+                    break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -3889,6 +3900,11 @@ namespace Intersect.Server.Networking
                     else if (type == GameObjectType.GuildVariable)
                     {
                         DbInterface.CacheGuildVariableEventTextLookups();
+                    }
+                    else if (type == GameObjectType.InstanceVariable)
+                    {
+                        // Don't trigger a instance change common event, because the editor can not change instance variable values - only their defaults
+                        DbInterface.CacheInstanceVariableEventTextLookups();
                     }
 
                     DbInterface.SaveGameObject(obj);

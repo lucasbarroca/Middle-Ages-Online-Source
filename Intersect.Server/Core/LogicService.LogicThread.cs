@@ -160,6 +160,9 @@ namespace Intersect.Server.Core
                                 }
                             }
 
+                            // Update our global list of unique instances that are being processed
+                            ProcessingInfo.UpdateActiveInstanceList(ActiveMapInstances.Values.ToList());
+
                             if (Options.Instance.Metrics.Enable)
                             {
                                 MetricsRoot.Instance.Game.ActiveEntities.Record(globalEntities);

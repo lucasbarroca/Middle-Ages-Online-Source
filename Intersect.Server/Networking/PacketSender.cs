@@ -8,6 +8,7 @@ using Intersect.GameObjects;
 using Intersect.GameObjects.Crafting;
 using Intersect.GameObjects.Events;
 using Intersect.GameObjects.Maps.MapList;
+using Intersect.GameObjects.Switches_and_Variables;
 using Intersect.Logging;
 using Intersect.Models;
 using Intersect.Network;
@@ -1673,6 +1674,13 @@ namespace Intersect.Server.Networking
                     break;
                 case GameObjectType.GuildVariable:
                     foreach (var obj in GuildVariableBase.Lookup)
+                    {
+                        SendGameObject(client, obj.Value, false, false, packetList);
+                    }
+
+                    break;
+                case GameObjectType.InstanceVariable:
+                    foreach (var obj in InstanceVariableBase.Lookup)
                     {
                         SendGameObject(client, obj.Value, false, false, packetList);
                     }

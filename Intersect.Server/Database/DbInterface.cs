@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -18,6 +18,7 @@ using Intersect.GameObjects.Crafting;
 using Intersect.GameObjects.Events;
 using Intersect.GameObjects.Maps;
 using Intersect.GameObjects.Maps.MapList;
+using Intersect.GameObjects.Switches_and_Variables;
 using Intersect.Logging;
 using Intersect.Logging.Output;
 using Intersect.Models;
@@ -71,6 +72,8 @@ namespace Intersect.Server.Database
         public static Dictionary<string, PlayerVariableBase> PlayerVariableEventTextLookup = new Dictionary<string, PlayerVariableBase>();
 
         public static Dictionary<string, GuildVariableBase> GuildVariableEventTextLookup = new Dictionary<string, GuildVariableBase>();
+
+        public static Dictionary<string, InstanceVariableBase> InstanceVariableEventTextLookup = new Dictionary<string, InstanceVariableBase>();
 
         public static ConcurrentDictionary<Guid, ServerVariableBase> UpdatedServerVariables = new ConcurrentDictionary<Guid, ServerVariableBase>();
 
@@ -323,6 +326,7 @@ namespace Intersect.Server.Database
                     CacheServerVariableEventTextLookups();
                     CachePlayerVariableEventTextLookups();
                     CacheGuildVariableEventTextLookups();
+                    CacheInstanceVariableEventTextLookups();
                 }
             }
 
@@ -566,6 +570,10 @@ namespace Intersect.Server.Database
                     GuildVariableBase.Lookup.Clear();
 
                     break;
+                case GameObjectType.InstanceVariable:
+                    InstanceVariableBase.Lookup.Clear();
+
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
@@ -705,6 +713,13 @@ namespace Intersect.Server.Database
                             }
 
                             break;
+                        case GameObjectType.InstanceVariable:
+                            foreach (var psw in context.InstanceVariables)
+                            {
+                                InstanceVariableBase.Lookup.Set(psw.Id, psw);
+                            }
+
+                            break;
                         default:
                             throw new ArgumentOutOfRangeException(nameof(gameObjectType), gameObjectType, null);
                     }
@@ -806,6 +821,10 @@ namespace Intersect.Server.Database
 
                 case GameObjectType.GuildVariable:
                     dbObj = new GuildVariableBase(predefinedid);
+
+                    break;
+                case GameObjectType.InstanceVariable:
+                    dbObj = new InstanceVariableBase(predefinedid);
 
                     break;
                 default:
@@ -927,7 +946,13 @@ namespace Intersect.Server.Database
                             GuildVariableBase.Lookup.Set(dbObj.Id, dbObj);
 
                             break;
+                        
+                        case GameObjectType.InstanceVariable:
+                            context.InstanceVariables.Add((InstanceVariableBase)dbObj);
+                            InstanceVariableBase.Lookup.Set(dbObj.Id, dbObj);
 
+                            break;
+                        
                         default:
                             throw new ArgumentOutOfRangeException(nameof(gameObjectType), gameObjectType, null);
                     }
@@ -1050,6 +1075,10 @@ namespace Intersect.Server.Database
                             context.GuildVariables.Remove((GuildVariableBase)gameObject);
 
                             break;
+                        case GameObjectType.InstanceVariable:
+                            context.InstanceVariables.Remove((InstanceVariableBase)gameObject);
+
+                            break;
                     }
 
                     if (gameObject.Type.GetLookup().Values.Contains(gameObject))
@@ -1170,6 +1199,10 @@ namespace Intersect.Server.Database
                             context.GuildVariables.Update((GuildVariableBase)gameObject);
 
                             break;
+                        case GameObjectType.InstanceVariable:
+                            context.InstanceVariables.Update((InstanceVariableBase)gameObject);
+
+                            break;
                     }
 
                     context.ChangeTracker.DetectChanges();
@@ -1281,6 +1314,21 @@ namespace Intersect.Server.Database
                 }
             }
             GuildVariableEventTextLookup = lookup;
+        }
+
+        public static void CacheInstanceVariableEventTextLookups()
+        {
+            var lookup = new Dictionary<string, InstanceVariableBase>();
+            var addedIds = new HashSet<string>();
+            foreach (InstanceVariableBase variable in InstanceVariableBase.Lookup.Values)
+            {
+                if (!string.IsNullOrWhiteSpace(variable.TextId) && !addedIds.Contains(variable.TextId))
+                {
+                    lookup.Add(Strings.Events.InstanceVar + "{" + variable.TextId + "}", variable);
+                    addedIds.Add(variable.TextId);
+                }
+            }
+            InstanceVariableEventTextLookup = lookup;
         }
 
         //Extra Map Helper Functions
@@ -1751,6 +1799,7 @@ namespace Intersect.Server.Database
                     MigrateDbSet(context.Spells, newGameContext.Spells);
                     MigrateDbSet(context.ServerVariables, newGameContext.ServerVariables);
                     MigrateDbSet(context.PlayerVariables, newGameContext.PlayerVariables);
+                    MigrateDbSet(context.InstanceVariables, newGameContext.InstanceVariables);
                     MigrateDbSet(context.Tilesets, newGameContext.Tilesets);
                     MigrateDbSet(context.Time, newGameContext.Time);
                     newGameContext.ChangeTracker.DetectChanges();
