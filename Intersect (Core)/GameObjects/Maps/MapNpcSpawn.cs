@@ -27,7 +27,18 @@ namespace Intersect.GameObjects.Maps
             
         public Guid SpawnVariableId { get; set; }
 
-        public VariableCompaison SpawnVariableComparison { get; set; } = new VariableCompaison();
+        public enum SpawnComparisonType
+        {
+            Boolean,
+            Integer,
+            String
+        }
+
+        public SpawnComparisonType SpawnConditionType { get; set; } = SpawnComparisonType.Boolean;
+
+        public BooleanVariableComparison BooleanSpawnComparison { get; set; } = new BooleanVariableComparison();
+        public IntegerVariableComparison IntegerSpawnComparison { get; set; } = new IntegerVariableComparison();
+        public StringVariableComparison StringSpawnComparison { get; set; } = new StringVariableComparison();
 
         public NpcSpawn()
         {
@@ -44,7 +55,9 @@ namespace Intersect.GameObjects.Maps
             ConditionalSpawning = copy.ConditionalSpawning;
             SpawnVariableType = copy.SpawnVariableType;
             SpawnVariableId = copy.SpawnVariableId;
-            SpawnVariableComparison = copy.SpawnVariableComparison;
+            BooleanSpawnComparison = copy.BooleanSpawnComparison;
+            IntegerSpawnComparison = copy.IntegerSpawnComparison;
+            StringSpawnComparison = copy.StringSpawnComparison;
         }
 
     }

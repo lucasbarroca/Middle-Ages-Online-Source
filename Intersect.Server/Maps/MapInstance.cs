@@ -1406,14 +1406,14 @@ namespace Intersect.Server.Maps
                     throw new NotImplementedException("Invalid variable type given for NPC Spawn condition");
             }
 
-            switch (spawn.SpawnVariableComparison)
+            switch (spawn.SpawnConditionType)
             {
-                case BooleanVariableComparison booleanVar:
-                    return Conditions.CheckVariableComparison(varValue, booleanVar, this);
-                case IntegerVariableComparison intVar:
-                    return Conditions.CheckVariableComparison(varValue, intVar, this);
-                case StringVariableComparison stringVar:
-                    return Conditions.CheckVariableComparison(varValue, stringVar);
+                case NpcSpawn.SpawnComparisonType.Boolean:
+                    return Conditions.CheckVariableComparison(varValue, spawn.BooleanSpawnComparison, this);
+                case NpcSpawn.SpawnComparisonType.Integer:
+                    return Conditions.CheckVariableComparison(varValue, spawn.IntegerSpawnComparison, this);
+                case NpcSpawn.SpawnComparisonType.String:
+                    return Conditions.CheckVariableComparison(varValue, spawn.StringSpawnComparison);
                 default:
                     return true;
             }

@@ -902,18 +902,17 @@ namespace Intersect.Editor.Forms.DockingElements
             //Load the correct editor
             if (varType > 0)
             {
-                var comparison = selectedSpawn.SpawnVariableComparison;
                 switch ((VariableDataTypes)varType)
                 {
                     case VariableDataTypes.Boolean:
                         grpBooleanVariable.Show();
-                        TryLoadVariableBooleanComparison(comparison);
+                        TryLoadVariableBooleanComparison(selectedSpawn.BooleanSpawnComparison);
 
                         break;
 
                     case VariableDataTypes.Integer:
                         grpNumericVariable.Show();
-                        TryLoadVariableIntegerComparison(comparison);
+                        TryLoadVariableIntegerComparison(selectedSpawn.IntegerSpawnComparison);
                         UpdateNumericVariableElements();
 
                         break;
@@ -923,7 +922,7 @@ namespace Intersect.Editor.Forms.DockingElements
 
                     case VariableDataTypes.String:
                         grpStringVariable.Show();
-                        TryLoadVariableStringComparison(comparison);
+                        TryLoadVariableStringComparison(selectedSpawn.StringSpawnComparison);
 
                         break;
 
@@ -960,7 +959,7 @@ namespace Intersect.Editor.Forms.DockingElements
 
         private void TryLoadVariableBooleanComparison(VariableCompaison comp)
         {
-            if (comp.GetType() == typeof(BooleanVariableComparison))
+            if (comp != null && comp.GetType() == typeof(BooleanVariableComparison))
             {
                 var com = (BooleanVariableComparison)comp;
 
@@ -992,7 +991,7 @@ namespace Intersect.Editor.Forms.DockingElements
 
         private void TryLoadVariableIntegerComparison(VariableCompaison comp)
         {
-            if (comp.GetType() == typeof(IntegerVariableComparison))
+            if (comp != null && comp.GetType() == typeof(IntegerVariableComparison))
             {
                 var com = (IntegerVariableComparison)comp;
 
@@ -1028,7 +1027,7 @@ namespace Intersect.Editor.Forms.DockingElements
 
         private void TryLoadVariableStringComparison(VariableCompaison comp)
         {
-            if (comp.GetType() == typeof(StringVariableComparison))
+            if (comp != null && comp.GetType() == typeof(StringVariableComparison))
             {
                 var com = (StringVariableComparison)comp;
 
@@ -1799,15 +1798,18 @@ namespace Intersect.Editor.Forms.DockingElements
 
             if (grpBooleanVariable.Visible)
             {
-                selectedSpawn.SpawnVariableComparison = GetBooleanVariableComparison();
+                selectedSpawn.BooleanSpawnComparison = GetBooleanVariableComparison();
+                selectedSpawn.SpawnConditionType = NpcSpawn.SpawnComparisonType.Boolean;
             }
             else if (grpNumericVariable.Visible)
             {
-                selectedSpawn.SpawnVariableComparison = GetNumericVariableComparison();
+                selectedSpawn.IntegerSpawnComparison = GetNumericVariableComparison();
+                selectedSpawn.SpawnConditionType = NpcSpawn.SpawnComparisonType.Integer;
             }
             else if (grpStringVariable.Visible)
             {
-                selectedSpawn.SpawnVariableComparison = GetStringVariableComparison();
+                selectedSpawn.StringSpawnComparison = GetStringVariableComparison();
+                selectedSpawn.SpawnConditionType = NpcSpawn.SpawnComparisonType.String;
             }
         }
 
