@@ -125,6 +125,8 @@ namespace Intersect.Editor.Forms.DockingElements
             {
                 cmbInstanceType.Items.Add(Enum.GetName(typeof(MapInstanceType), i));
             }
+
+            InitializeConditionVariables();
         }
 
         //Tiles Tab

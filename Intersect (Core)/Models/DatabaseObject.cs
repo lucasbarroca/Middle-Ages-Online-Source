@@ -62,9 +62,10 @@ namespace Intersect.Models
             JsonConvert.PopulateObject(
                 json, this, new JsonSerializerSettings
                 {
-                    ObjectCreationHandling = ObjectCreationHandling.Replace,
+                    Formatting = Formatting.None,
                     TypeNameHandling = TypeNameHandling.Auto,
                     DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
+                    ObjectCreationHandling = ObjectCreationHandling.Replace
                 }
             );
 
