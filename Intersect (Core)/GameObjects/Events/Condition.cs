@@ -541,6 +541,8 @@ namespace Intersect.GameObjects.Events
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
+            if (reader == null) return new JObject();
+
             JObject readJson = JObject.Load(reader);
 
             // The best way to tell which type to transform to is to take the type of the Value property...
