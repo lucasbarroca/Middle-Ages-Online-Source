@@ -88,7 +88,7 @@ namespace Intersect.Server.Entities
                 }
 
                 // Increment records/determine resource bonuses
-                long recordKilled = playerKiller.IncrementRecord(RecordType.ResourceGathered, Base.Id);
+                //long recordKilled = playerKiller.IncrementRecord(RecordType.ResourceGathered, Base.Id);
                 long amountHarvested = GetAmountInGroupHarvested(playerKiller);
                 List<int> intervals = Options.Instance.CombatOpts.HarvestBonusIntervals;
                 long progressUntilNextBonus = GetHarvestsUntilNextBonus(playerKiller);

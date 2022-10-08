@@ -4248,11 +4248,11 @@ namespace Intersect.Server.Entities
                 );
                     
                 // Update our record of how many of this item we've crafted
-                long recordCrafted = IncrementRecord(RecordType.ItemCrafted, id);
+                /*long recordCrafted = IncrementRecord(RecordType.ItemCrafted, id);
                 if (Options.SendCraftingRecordUpdates && recordCrafted % Options.CraftingRecordUpdateInterval == 0)
                 {
                     SendRecordUpdate(Strings.Records.itemcrafted.ToString(recordCrafted, itemName));
-                }
+                }*/
 
                 // Give inspiration exp
                 GiveInspiredExperience(craft.Experience);
@@ -8290,6 +8290,7 @@ namespace Intersect.Server.Entities
         /// <returns></returns>
         public bool TrySetRecord(RecordType type, Guid recordId, long amount, List<Player> teammates = null, bool instantSave = false)
         {
+            return false;
             PlayerRecord matchingRecord;
             var scoreType = RecordScoring.High;
             lock (EntityLock)

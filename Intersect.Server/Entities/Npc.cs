@@ -208,11 +208,11 @@ namespace Intersect.Server.Entities
 
                 if (killer is Player playerKiller)
                 {
-                    long recordKilled = playerKiller.IncrementRecord(RecordType.NpcKilled, Base.Id);
+                    /*long recordKilled = playerKiller.IncrementRecord(RecordType.NpcKilled, Base.Id);
                     if (Options.SendNpcRecordUpdates && recordKilled % Options.NpcRecordUpdateInterval == 0)
                     {
                         playerKiller.SendRecordUpdate(Strings.Records.enemykilled.ToString(recordKilled, Name));
-                    }
+                    }*/
                 }
             }
         }
