@@ -459,29 +459,32 @@ namespace Intersect.Editor.Core
             switch (map.Layers[layerName][x, y].Autotile)
             {
                 case MapAutotiles.AUTOTILE_WATERFALL:
-                    yOffset = (Globals.WaterfallFrame - 1) * Options.TileHeight;
+                    yOffset = (Globals.WaterfallFrame - 1) * Options.TileHeightScaled;
 
                     break;
                 case MapAutotiles.AUTOTILE_ANIM:
-                    xOffset = Globals.AutotileFrame * Options.TileWidth * 2;
+                    xOffset = Globals.AutotileFrame * Options.TileWidthScaled * 2;
 
                     break;
                 case MapAutotiles.AUTOTILE_ANIM_XP:
-                    xOffset = Globals.AutotileFrame * Options.TileWidth * 3;
+                    xOffset = Globals.AutotileFrame * Options.TileWidthScaled * 3;
 
                     break;
                 case MapAutotiles.AUTOTILE_CLIFF:
-                    yOffset = -Options.TileHeight;
+                    yOffset = -Options.TileHeightScaled;
 
                     break;
             }
 
-            DrawTexture(
-                texture, destX, destY,
-                (int) map.Autotiles.Layers[layerName][x, y].QuarterTile[quarterNum].X + xOffset,
-                (int) map.Autotiles.Layers[layerName][x, y].QuarterTile[quarterNum].Y + yOffset,
-                Options.TileWidth / 2, Options.TileHeight / 2, target
-            );
+            DrawTexture(texture,
+                new RectangleF(
+                    (int)map.Autotiles.Layers[layerName][x, y].QuarterTile[quarterNum].X + xOffset,
+                    (int)map.Autotiles.Layers[layerName][x, y].QuarterTile[quarterNum].Y + yOffset,
+                    Options.TileWidthScaled / 2,
+                    Options.TileHeightScaled / 2
+                    ),
+                new RectangleF(destX, destY, Options.TileWidth / 2, Options.TileHeight / 2),
+                target);
         }
 
         private static void DrawMap(
@@ -809,12 +812,10 @@ namespace Intersect.Editor.Core
                                 }
                                 else
                                 {
-                                    DrawTexture(
-                                        tilesetTex, x * Options.TileWidth + xoffset, y * Options.TileHeight + yoffset,
-                                        tmpMap.Layers[drawLayer][x, y].X * Options.TileWidth,
-                                        tmpMap.Layers[drawLayer][x, y].Y * Options.TileHeight, Options.TileWidth,
-                                        Options.TileHeight, renderTarget2D
-                                    );
+                                    DrawTexture(tilesetTex,
+                                        new RectangleF(tmpMap.Layers[drawLayer][x, y].X * Options.TileWidthScaled, tmpMap.Layers[drawLayer][x, y].Y * Options.TileHeightScaled, Options.TileWidthScaled, Options.TileHeightScaled),
+                                        new RectangleF(x * Options.TileWidth + xoffset, y * Options.TileHeight + yoffset, Options.TileWidth, Options.TileHeight),
+                                        renderTarget2D);
                                 }
                             }
                         }
@@ -1207,7 +1208,10 @@ namespace Intersect.Editor.Core
 
                 if (tilesetTex != null)
                 {
-                    DrawTexture(tilesetTex, 0, 0, sTilesetChain);
+                    DrawTexture(tilesetTex,
+                        new RectangleF(0, 0, tilesetTex.Width, tilesetTex.Height),
+                        new RectangleF(0, 0, tilesetTex.Width * Options.Scale, tilesetTex.Height * Options.Scale),
+                        sTilesetChain);
                     var selX = Globals.CurSelX;
                     var selY = Globals.CurSelY;
                     var selW = Globals.CurSelW;

@@ -260,7 +260,11 @@ namespace Intersect
 
         public static int TileWidth => Instance.MapOpts.TileWidth;
 
+        public static int TileWidthScaled => TileWidth / Scale;
+
         public static int TileHeight => Instance.MapOpts.TileHeight;
+
+        public static int TileHeightScaled => TileHeight / Scale;
 
         public static bool DebugAllowMapFades => Instance.MapOpts.DebugAllowMapFades;
 

@@ -415,8 +415,8 @@ namespace Intersect.Client.Maps
                         continue;
                     }
 
-                    if (tile.X * Options.TileWidth >= tilesetTex.GetWidth() ||
-                        tile.Y * Options.TileHeight >= tilesetTex.GetHeight())
+                    if (tile.X * Options.TileWidth >= tilesetTex.ScaledWidth ||
+                        tile.Y * Options.TileHeight >= tilesetTex.ScaledHeight)
                     {
                         continue;
                     }
@@ -925,8 +925,8 @@ namespace Intersect.Client.Maps
                         continue;
                     }
 
-                    if (tile.X * Options.TileWidth >= tilesetTex.GetWidth() ||
-                        tile.Y * Options.TileHeight >= tilesetTex.GetHeight())
+                    if (tile.X * Options.TileWidth >= tilesetTex.ScaledWidth ||
+                        tile.Y * Options.TileHeight >= tilesetTex.ScaledHeight)
                     {
                         continue;
                     }

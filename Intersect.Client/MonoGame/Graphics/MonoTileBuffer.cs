@@ -87,8 +87,8 @@ namespace Intersect.Client.Classes.MonoGame.Graphics
 
             var texture = (Texture2D) tex.GetTexture();
 
-            var textureSizeX = 1f / texture.Width;
-            var textureSizeY = 1f / texture.Height;
+            var textureSizeX = 1f / (texture.Width * Options.Scale);
+            var textureSizeY = 1f / (texture.Height * Options.Scale);
 
             var left = srcX * textureSizeX;
             var right = (srcX + srcW) * textureSizeX;
@@ -131,6 +131,7 @@ namespace Intersect.Client.Classes.MonoGame.Graphics
             {
                 mGraphicsDevice.SetVertexBuffer(vertexBuffer);
                 mGraphicsDevice.Indices = indexBuffer;
+                mGraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
 
                 basicEffect.Texture = (Texture2D) Texture.GetTexture();
                 foreach (var pass in basicEffect.CurrentTechnique.Passes)
@@ -245,8 +246,8 @@ namespace Intersect.Client.Classes.MonoGame.Graphics
 
             var texture = (Texture2D) tex.GetTexture();
 
-            var textureSizeX = 1f / texture.Width;
-            var textureSizeY = 1f / texture.Height;
+            var textureSizeX = 1f / texture.Width * Options.Scale;
+            var textureSizeY = 1f / texture.Height * Options.Scale;
 
             var left = srcX * textureSizeX;
             var right = (srcX + srcW) * textureSizeX;
