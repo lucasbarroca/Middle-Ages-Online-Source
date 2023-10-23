@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Linq;
 using Intersect.Client.Framework.File_Management;
 using Intersect.Client.Framework.GenericClasses;
 using Intersect.Client.Framework.Graphics;
@@ -28,6 +28,14 @@ namespace Intersect.Client.Framework.Gwen.Control
         protected float mMin;
 
         protected int mNotchCount;
+
+        protected double[] _notches;
+
+        public double[] Notches
+        {
+            get => _notches;
+            set => _notches = value;
+        }
 
         protected bool mSnapToNotches;
 
@@ -127,12 +135,16 @@ namespace Intersect.Client.Framework.Gwen.Control
             obj.Add("BackgroundImage", GetImageFilename());
             obj.Add("SnapToNotches", mSnapToNotches);
             obj.Add("NotchCount", mNotchCount);
+            var notches = (Notches == default || Notches.Length < 1)
+                ? default
+                : new JArray(Notches.Cast<object>().ToArray());
+            obj.Add(nameof(Notches), notches);
             obj.Add("SliderBar", mSliderBar.GetJson());
 
             return base.FixJson(obj);
         }
 
-        public override void LoadJson(JToken obj)
+        public override void LoadJson(JToken obj, bool isRoot = default)
         {
             base.LoadJson(obj);
             if (obj["BackgroundImage"] != null)
@@ -152,6 +164,20 @@ namespace Intersect.Client.Framework.Gwen.Control
             if (obj["NotchCount"] != null)
             {
                 mNotchCount = (int) obj["NotchCount"];
+            }
+
+            var notches = obj[nameof(Notches)];
+            if (notches != null && notches.Type != JTokenType.Null)
+            {
+                Notches = ((JArray)notches).Select(token => (double)token).ToArray();
+                if (Notches.Length < 1)
+                {
+                    Notches = default;
+                }
+            }
+            else
+            {
+                Notches = default;
             }
 
             if (obj["SliderBar"] != null)
@@ -290,8 +316,19 @@ namespace Intersect.Client.Framework.Gwen.Control
         {
             if (mSnapToNotches)
             {
-                val = (float) Math.Floor(val * mNotchCount + 0.5f);
-                val /= mNotchCount;
+                if (_notches == default || _notches.Length < 1)
+                {
+                    val = (float)Math.Floor(val * mNotchCount + 0.5f);
+                    val /= mNotchCount;
+                }
+                else
+                {
+                    var notchMin = _notches.Min();
+                    var notchMax = _notches.Max();
+                    var notchRange = notchMax - notchMin;
+                    var sorted = _notches.OrderBy(notchValue => Math.Abs(notchMin + val * notchRange - notchValue)).ToArray();
+                    val = (float)((sorted.First() - notchMin) / notchRange);
+                }
             }
 
             if (mValue != val)

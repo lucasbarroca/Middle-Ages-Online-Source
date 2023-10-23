@@ -402,7 +402,7 @@ namespace Intersect.Client.Interface.Menu
                 Strings.CharacterSelection.deletetitle.ToString(Characters[mSelectedChar].Name),
                 Strings.CharacterSelection.deleteprompt.ToString(Characters[mSelectedChar].Name), true,
                 InputBox.InputType.YesNo, DeleteCharacter, null, Characters[mSelectedChar].Id, 0,
-                mCharacterSelectionPanel.Parent, GameContentManager.UI.Menu
+                parent: mCharacterSelectionPanel.Parent, stage: GameContentManager.UI.Menu
             );
         }
 

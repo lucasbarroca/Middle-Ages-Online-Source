@@ -773,7 +773,7 @@ namespace Intersect.Client.Entities
                     _ = new InputBox(
                         promptTitle,
                         manyPromptText.ToString(itemName), true,
-                        InputBox.InputType.NumericInput, HandleStackableSlotAction(slotAction, multiSlotAction), null, new KeyValuePair<int, int[]>(selectedSlot, slots), totalItems
+                        InputBox.InputType.NumericSliderInput, HandleStackableSlotAction(slotAction, multiSlotAction), null, new KeyValuePair<int, int[]>(selectedSlot, slots), totalItems, totalItems
                     );
                 }
                 else
@@ -813,7 +813,7 @@ namespace Intersect.Client.Entities
                 _ = new InputBox(
                     promptTitle,
                     manyPromptText.ToString(itemName), true,
-                    InputBox.InputType.NumericInput, HandleNonstackableMultislotAction(slotAction, multiSlotAction), null, new KeyValuePair<int, int[]>(selectedSlot, slots), slots.Length
+                    InputBox.InputType.NumericSliderInput, HandleNonstackableMultislotAction(slotAction, multiSlotAction), null, new KeyValuePair<int, int[]>(selectedSlot, slots), slots.Length, slots.Length
                 );
             }
         }
