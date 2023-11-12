@@ -2290,7 +2290,7 @@ namespace Intersect.Server.Networking
                 return;
             }
 
-            player?.RetrieveBagItem(packet.Slot, packet.Quantity, packet.InventorySlot);
+            player?.WithdrawBagItem(packet.Slot, packet.Quantity, packet.InventorySlot);
         }
 
         //SwapBagItemPacket

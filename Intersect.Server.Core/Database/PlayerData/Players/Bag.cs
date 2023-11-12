@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 using Intersect.GameObjects;
 using Intersect.Logging;
 using Microsoft.EntityFrameworkCore;
@@ -195,6 +195,11 @@ namespace Intersect.Server.Database.PlayerData.Players
         public int FindSlotIndex(BagSlot slot)
         {
             return Slots.FindIndex(sl => sl.Id == slot.Id);
+        }
+
+        public bool ContainsItem(Guid itemId)
+        {
+            return Slots.Any(slot => slot.ItemId == itemId);
         }
 
     }

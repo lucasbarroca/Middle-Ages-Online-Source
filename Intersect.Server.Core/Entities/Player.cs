@@ -2459,6 +2459,62 @@ namespace Intersect.Server.Entities
             var openSlots = FindOpenInventorySlots().Count;
             var slotsRequired = (int)Math.Ceiling(item.Quantity / (double)item.Descriptor.MaxInventoryStack);
 
+            // Get possible bag slots so we can prioritize those first
+            var bags = GetBagsContaining(item.ItemId);
+
+            if (bags.Length > 0)
+            {
+                foreach (var bag in bags)
+                {
+                    // Have we already finished allocating items to bag slots? Abort
+                    if (item.Quantity <= 0)
+                    {
+                        return true;
+                    }
+
+                    var bagChanged = false;
+                    var bagSlots = bag.FindBagItemSlots(item.ItemId);
+                    foreach (var bagSlot in bagSlots)
+                    {
+                        var maxAmount = item.Descriptor.MaxInventoryStack - bagSlot.Quantity;
+                        bagSlot.Quantity += Math.Min(maxAmount, item.Quantity);
+                        item.Quantity -= maxAmount;
+                        bagChanged = true;
+                    }
+
+                    if (item.Quantity > 0)
+                    {
+                        var emptyBagSlots = bag.FindOpenBagSlots();
+                        foreach (var emptyBagSlot in emptyBagSlots)
+                        {
+                            var maxAmount = item.Descriptor.MaxInventoryStack;
+                            var newItem = item.Clone();
+                            newItem.Quantity = Math.Min(item.Descriptor.MaxInventoryStack, item.Quantity);
+                            emptyBagSlot.Set(item);
+                            item.Quantity -= emptyBagSlot.Quantity;
+                        }
+                    }
+
+                    if (!bagChanged)
+                    {
+                        continue;
+                    }
+                    
+                    // Update client if the bag was opened
+                    bag.Save();
+                    if (InBag?.Id == bag.Id)
+                    {
+                        PacketSender.SendOpenBag(this, bag.SlotCount, bag);
+                    }
+                }
+            }
+
+            // If we gave all the items to bag slots, abort
+            if (item.Quantity <= 0)
+            {
+                return true;
+            }
+
             // How are we going to be handling this?
             var success = false;
             switch (handler)
@@ -2536,6 +2592,22 @@ namespace Intersect.Server.Entities
             return bankOverflow && bankInterface.TryDepositItem(item, sendUpdate);
         }
 
+        public Bag[] GetBagsContaining(Guid itemId)
+        {
+            return Items
+                .Where(inventoryItem => inventoryItem.Descriptor?.ItemType == ItemType.Bag)
+                .Select(invItem =>
+                {
+                    if (invItem.TryGetBag(out var bag))
+                    {
+                        return bag;
+                    }
+
+                    return null;
+                })
+                .Where(bag => bag != null && bag.ContainsItem(itemId))
+                .ToArray();
+        }
 
         /// <summary>
         /// Gives the player an item. NOTE: This method MAKES ZERO CHECKS to see if this is possible!
@@ -4093,6 +4165,12 @@ namespace Intersect.Server.Entities
                     bagSlots[bagSlotIdx].Quantity -= amountToGive;
                 }
 
+                if (bagSlots[bagSlotIdx].Quantity <= 0)
+                {
+                    bagSlots[bagSlotIdx].Set(Item.None);
+                }
+
+                bag.Save();
                 // Aaaand tell the client (if we actually dumped any amount of the item)
                 if (amountToGive > 0)
                 {
@@ -4241,7 +4319,7 @@ namespace Intersect.Server.Entities
             }
         }
 
-        public void RetrieveBagItem(int slot, int amount, int invSlot)
+        public void WithdrawBagItem(int slot, int amount, int invSlot)
         {
             if (InBag == null || !HasBag(InBag))
             {
