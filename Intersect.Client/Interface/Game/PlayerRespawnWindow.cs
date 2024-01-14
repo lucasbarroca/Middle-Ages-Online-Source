@@ -130,6 +130,10 @@ namespace Intersect.Client.Interface.Game
                 DungeonRespawnButton.Show();
                 LeaveInstanceButton.Show();
             }
+            if (deathType == DeathType.Hardcore) 
+            {
+                DeathText.AddText(Strings.RespawnWindow.DeathHardcore.ToString(expLost), DeathTextTemplate);
+            }
 
             DeathText.SizeToChildren(false, true);
             TextContainer.ScrollToTop();

@@ -1144,8 +1144,7 @@ namespace Intersect.Server.Entities
                 }
             }
 
-            var currentMapZoneType = MapController.Get(Map.Id).ZoneType;
-            CancelCast();
+            var currentMapZoneType = MapController.Get(Map.Id).ZoneType;CancelCast();
             CastTarget = null;
 
             //Flag death to the client
@@ -1229,14 +1228,23 @@ namespace Intersect.Server.Entities
 
             if (InDuel)
             {
+                HardcoreSafety = true;
                 PacketSender.SendPlayerDeathType(this, DeathType.Duel);
             }
             else
             {
-                PacketSender.SendPlayerDeathType(this, GetDeathType((long)expLoss), (long)expLoss, ItemsLost);
+                if (HardcoreMode && !HardcoreSafety)
+                {
+                    PacketSender.SendPlayerDeathType(this, DeathType.Hardcore);
+                }
+                else
+                {
+                    PacketSender.SendPlayerDeathType(this, GetDeathType((long)expLoss), (long)expLoss, ItemsLost);
+                }
             }
             PacketSender.SendEntityDie(this);
             PacketSender.SendInventory(this);
+            HardcoreSafety = false;
         }
 
         /// <summary>
@@ -9823,5 +9831,11 @@ namespace Intersect.Server.Entities
                     ?.FirstOrDefault()?.Rank ?? 0;
             }
         }
+
+        [NotMapped, JsonIgnore]
+        public bool HardcoreMode { get; set; } = true;
+
+        [NotMapped, JsonIgnore]
+        public bool HardcoreSafety { get; set; } = false;
     }
 }
