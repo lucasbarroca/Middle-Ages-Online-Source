@@ -159,7 +159,15 @@ namespace Intersect.Client.Interface.Game.Inventory
                 }
                 else
                 {
-                    Globals.Me.TryDropItem(mMySlot);
+                    var slot = Globals.Me.Inventory[mMySlot];
+                    if (ItemBase.TryGet(slot.ItemId, out var descriptor) && descriptor.Placeable)
+                    {
+                        Globals.Me.TryPlaceItem(mMySlot);
+                    }
+                    else
+                    {
+                        Globals.Me.TryDropItem(mMySlot);
+                    }
                 }
             }
         }

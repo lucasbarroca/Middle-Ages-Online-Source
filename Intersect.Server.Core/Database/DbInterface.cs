@@ -1374,8 +1374,11 @@ namespace Intersect.Server.Database
 
                             break;
                         case GameObjectType.Map:
-                            context.Maps.Update((MapController)gameObject);
-
+                            if (gameObject is MapController mapController)
+                            {
+                                mapController.CapturePlacedItems();
+                                context.Maps.Update(mapController);
+                            }
                             break;
                         case GameObjectType.Event:
                             context.Events.Update((EventBase)gameObject);

@@ -8,5 +8,6 @@ namespace Intersect.Client.Framework.Items
         Guid Id { get; set; }
         int X { get; set; }
         int Y { get; set; }
+        bool Placed { get; set; }
     }
 }
