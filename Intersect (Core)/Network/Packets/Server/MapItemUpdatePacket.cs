@@ -20,7 +20,7 @@ namespace Intersect.Network.Packets.Server
         }
 
         //Item data implies item added or updated
-        public MapItemUpdatePacket(Guid mapId, int tileIndex, Guid uniqueId, Guid itemId, Guid? bagId, int quantity, ItemProperties properties)
+        public MapItemUpdatePacket(Guid mapId, int tileIndex, Guid uniqueId, Guid itemId, Guid? bagId, int quantity, ItemProperties properties, bool placed)
         {
             MapId = mapId;
             TileIndex = tileIndex;
@@ -29,6 +29,7 @@ namespace Intersect.Network.Packets.Server
             BagId = bagId;
             Quantity = quantity;
             Properties = properties;
+            Placed = placed;
         }
 
         [Key(0)]
@@ -51,6 +52,9 @@ namespace Intersect.Network.Packets.Server
 
         [Key(6)]
         public ItemProperties Properties { get; set; }
+
+        [Key(7)]
+        public bool Placed { get; set; }
 
     }
 

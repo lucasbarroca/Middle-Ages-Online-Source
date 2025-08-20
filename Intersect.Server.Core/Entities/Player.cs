@@ -3142,6 +3142,40 @@ namespace Intersect.Server.Entities
             return true;
         }
 
+        public bool TryPlaceItemFrom(int slotIndex)
+        {
+            if (!TryGetItemAt(slotIndex, out var itemInSlot))
+            {
+                return false;
+            }
+
+            var itemDescriptor = itemInSlot.Descriptor;
+            if (itemDescriptor == null || !itemDescriptor.Placeable)
+            {
+                return false;
+            }
+
+            if (!MapController.TryGetInstanceFromMap(MapId, MapInstanceId, out var mapInstance))
+            {
+                return false;
+            }
+
+            var itemToPlace = new Item(itemInSlot.ItemId, 1, itemInSlot.BagId, itemInSlot.Bag, new ItemProperties(itemInSlot.Properties));
+            mapInstance.PlaceItem(X, Y, itemToPlace);
+
+            itemInSlot.Quantity -= 1;
+
+            if (itemInSlot.Quantity <= 0)
+            {
+                itemInSlot.Set(Item.None);
+                EquipmentProcessItemLoss(slotIndex);
+            }
+
+            PacketSender.SendInventoryItemUpdate(this, slotIndex);
+            StartCommonEventsWithTrigger(CommonEventTrigger.InventoryChanged);
+            return true;
+        }
+
         /// <summary>
         /// Drops <paramref name="amount"/> of the item in the slot identified by <paramref name="slotIndex"/>.
         /// </summary>
