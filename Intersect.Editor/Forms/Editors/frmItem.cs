@@ -139,6 +139,14 @@ namespace Intersect.Editor.Forms.Editors
             cmbEquipmentAnimation.Items.Clear();
             cmbEquipmentAnimation.Items.Add(Strings.General.None);
             cmbEquipmentAnimation.Items.AddRange(AnimationBase.Names);
+            cmbPlacedAnimation.Items.Clear();
+            cmbPlacedAnimation.Items.Add(Strings.General.None);
+            cmbPlacedAnimation.Items.AddRange(AnimationBase.Names);
+            cmbPlacedSprite.Items.Clear();
+            cmbPlacedSprite.Items.Add(Strings.General.None);
+            cmbPlacedSprite.Items.AddRange(
+                GameContentManager.GetSmartSortedTextureNames(GameContentManager.TextureType.Resource)
+            );
             cmbTeachSpell.Items.Clear();
             cmbTeachSpell.Items.Add(Strings.General.None);
             cmbTeachSpell.Items.AddRange(SpellBase.Names);
@@ -218,6 +226,9 @@ namespace Intersect.Editor.Forms.Editors
             chkCanBag.Text = Strings.ItemEditor.CanBag;
             chkCanTrade.Text = Strings.ItemEditor.CanTrade;
             chkCanSell.Text = Strings.ItemEditor.CanSell;
+            chkPlaceable.Text = Strings.ItemEditor.Placeable;
+            lblPlacedSprite.Text = Strings.ItemEditor.PlacedSprite;
+            lblPlacedAnimation.Text = Strings.ItemEditor.PlacedAnimation;
 
             grpStack.Text = Strings.ItemEditor.StackOptions;
             chkStackable.Text = Strings.ItemEditor.stackable;
@@ -389,6 +400,12 @@ namespace Intersect.Editor.Forms.Editors
                 chkCanBag.Checked = Convert.ToBoolean(mEditorItem.CanBag);
                 chkCanSell.Checked = Convert.ToBoolean(mEditorItem.CanSell);
                 chkCanTrade.Checked = Convert.ToBoolean(mEditorItem.CanTrade);
+                chkPlaceable.Checked = mEditorItem.Placeable;
+                cmbPlacedSprite.SelectedIndex = cmbPlacedSprite.FindString(
+                    TextUtils.NullToNone(mEditorItem.PlacedSprite)
+                );
+                cmbPlacedAnimation.SelectedIndex =
+                    AnimationBase.ListIndex(mEditorItem.PlacedAnimationId) + 1;
                 chkStackable.Checked = Convert.ToBoolean(mEditorItem.Stackable);
                 nudInvStackLimit.Value = mEditorItem.MaxInventoryStack;
                 nudBankStackLimit.Value = mEditorItem.MaxBankStack;
@@ -403,6 +420,7 @@ namespace Intersect.Editor.Forms.Editors
                 nudBlockAmount.Value = mEditorItem.BlockAmount;
                 nudBlockDmgAbs.Value = mEditorItem.BlockAbsorption;
                 RefreshExtendedData();
+                UpdatePlaceableControls();
 
                 chk2Hand.Checked = mEditorItem.TwoHanded;
                 cmbMalePaperdoll.SelectedIndex =
@@ -750,6 +768,15 @@ namespace Intersect.Editor.Forms.Editors
             }
         }
 
+        private void UpdatePlaceableControls()
+        {
+            var enabled = chkPlaceable.Checked;
+            lblPlacedSprite.Enabled = enabled;
+            cmbPlacedSprite.Enabled = enabled;
+            lblPlacedAnimation.Enabled = enabled;
+            cmbPlacedAnimation.Enabled = enabled;
+        }
+
         private void UpdateToolStripItems()
         {
             toolStripItemCopy.Enabled = mEditorItem != null && lstGameObjects.Focused;
@@ -793,6 +820,23 @@ namespace Intersect.Editor.Forms.Editors
         private void cmbProjectile_SelectedIndexChanged(object sender, EventArgs e)
         {
             mEditorItem.Projectile = ProjectileBase.Get(ProjectileBase.IdFromList(cmbProjectile.SelectedIndex - 1));
+        }
+
+        private void cmbPlacedSprite_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mEditorItem.PlacedSprite = TextUtils.SanitizeNone(cmbPlacedSprite.Text);
+        }
+
+        private void cmbPlacedAnimation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mEditorItem.PlacedAnimation =
+                AnimationBase.Get(AnimationBase.IdFromList(cmbPlacedAnimation.SelectedIndex - 1));
+        }
+
+        private void chkPlaceable_CheckedChanged(object sender, EventArgs e)
+        {
+            mEditorItem.Placeable = chkPlaceable.Checked;
+            UpdatePlaceableControls();
         }
 
         private void btnEditRequirements_Click(object sender, EventArgs e)

@@ -106,6 +106,28 @@ namespace Intersect.GameObjects
         /// </summary>
         public bool CanBag { get; set; } = true;
 
+        /// <summary>
+        /// Defines whether this item can be placed on the map by a player.
+        /// </summary>
+        public bool Placeable { get; set; }
+
+        /// <summary>
+        /// The sprite displayed when this item is placed on the map.
+        /// </summary>
+        public string PlacedSprite { get; set; } = "";
+
+        [Column("PlacedAnimation")]
+        [JsonProperty]
+        public Guid PlacedAnimationId { get; set; }
+
+        [NotMapped]
+        [JsonIgnore]
+        public AnimationBase? PlacedAnimation
+        {
+            get => AnimationBase.Get(PlacedAnimationId);
+            set => PlacedAnimationId = value?.Id ?? Guid.Empty;
+        }
+
         public int CritChance { get; set; }
 
         public double CritMultiplier { get; set; } = 1.5;
@@ -506,6 +528,9 @@ namespace Intersect.GameObjects
             Consumable = new ConsumableData();
             Effects = new List<EffectData>();
             Color = new Color(255, 255, 255, 255);
+            Placeable = false;
+            PlacedSprite = "";
+            PlacedAnimationId = Guid.Empty;
         }
     }
 
