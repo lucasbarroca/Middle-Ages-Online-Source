@@ -184,6 +184,21 @@ namespace Intersect.GameObjects
 
         public string Icon { get; set; } = "";
 
+        public bool Placeable { get; set; }
+
+        public string PlacedSprite { get; set; } = "";
+
+        [Column("PlacedAnimation")]
+        public Guid PlacedAnimationId { get; set; }
+
+        [NotMapped]
+        [JsonIgnore]
+        public AnimationBase PlacedAnimation
+        {
+            get => AnimationBase.Get(PlacedAnimationId);
+            set => PlacedAnimationId = value?.Id ?? Guid.Empty;
+        }
+
         /// <summary>
         /// The database compatible version of <see cref="Color"/>
         /// </summary>

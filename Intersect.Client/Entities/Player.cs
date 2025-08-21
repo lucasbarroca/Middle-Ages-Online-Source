@@ -403,6 +403,22 @@ namespace Intersect.Client.Entities
             );
         }
 
+        public void TryPlaceItem(int inventorySlotIndex)
+        {
+            var inventorySlot = Inventory[inventorySlotIndex];
+            if (!ItemBase.TryGet(inventorySlot.ItemId, out var itemDescriptor))
+            {
+                return;
+            }
+
+            if (!itemDescriptor.Placeable)
+            {
+                return;
+            }
+
+            PacketSender.SendPlaceItem(inventorySlotIndex);
+        }
+
         private void DropInputBoxOkay(object sender, EventArgs e)
         {
             var value = (int)Math.Round(((InputBox)sender).Value);

@@ -136,6 +136,12 @@ namespace Intersect.Editor.Forms.Editors
             cmbAnimation.Items.Clear();
             cmbAnimation.Items.Add(Strings.General.None);
             cmbAnimation.Items.AddRange(AnimationBase.Names);
+            cmbPlacedSprite.Items.Clear();
+            cmbPlacedSprite.Items.Add(Strings.General.None);
+            cmbPlacedSprite.Items.AddRange(itemnames);
+            cmbPlacedAnimation.Items.Clear();
+            cmbPlacedAnimation.Items.Add(Strings.General.None);
+            cmbPlacedAnimation.Items.AddRange(AnimationBase.Names);
             cmbEquipmentAnimation.Items.Clear();
             cmbEquipmentAnimation.Items.Add(Strings.General.None);
             cmbEquipmentAnimation.Items.AddRange(AnimationBase.Names);
@@ -218,6 +224,9 @@ namespace Intersect.Editor.Forms.Editors
             chkCanBag.Text = Strings.ItemEditor.CanBag;
             chkCanTrade.Text = Strings.ItemEditor.CanTrade;
             chkCanSell.Text = Strings.ItemEditor.CanSell;
+            chkPlaceable.Text = Strings.ItemEditor.Placeable;
+            lblPlacedSprite.Text = Strings.ItemEditor.PlacedSprite;
+            lblPlacedAnimation.Text = Strings.ItemEditor.PlacedAnimation;
 
             grpStack.Text = Strings.ItemEditor.StackOptions;
             chkStackable.Text = Strings.ItemEditor.stackable;
@@ -355,6 +364,11 @@ namespace Intersect.Editor.Forms.Editors
                 cmbEquipmentAnimation.SelectedIndex = AnimationBase.ListIndex(mEditorItem.EquipmentAnimationId) + 1;
                 nudPrice.Value = mEditorItem.Price;
                 cmbRarity.SelectedIndex = mEditorItem.Rarity;
+                chkPlaceable.Checked = mEditorItem.Placeable;
+                cmbPlacedSprite.SelectedIndex = cmbPlacedSprite.FindString(TextUtils.NullToNone(mEditorItem.PlacedSprite));
+                cmbPlacedAnimation.SelectedIndex = AnimationBase.ListIndex(mEditorItem.PlacedAnimationId) + 1;
+                cmbPlacedSprite.Enabled = chkPlaceable.Checked;
+                cmbPlacedAnimation.Enabled = chkPlaceable.Checked;
 
                 nudStr.Value = mEditorItem.StatsGiven[0];
                 nudMag.Value = mEditorItem.StatsGiven[1];
@@ -940,6 +954,23 @@ namespace Intersect.Editor.Forms.Editors
         private void chkCanSell_CheckedChanged(object sender, EventArgs e)
         {
             mEditorItem.CanSell = chkCanSell.Checked;
+        }
+
+        private void chkPlaceable_CheckedChanged(object sender, EventArgs e)
+        {
+            mEditorItem.Placeable = chkPlaceable.Checked;
+            cmbPlacedSprite.Enabled = chkPlaceable.Checked;
+            cmbPlacedAnimation.Enabled = chkPlaceable.Checked;
+        }
+
+        private void cmbPlacedSprite_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mEditorItem.PlacedSprite = cmbPlacedSprite.SelectedIndex < 1 ? null : cmbPlacedSprite.Text;
+        }
+
+        private void cmbPlacedAnimation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mEditorItem.PlacedAnimation = AnimationBase.Get(AnimationBase.IdFromList(cmbPlacedAnimation.SelectedIndex - 1));
         }
 
         private void nudDeathDropChance_ValueChanged(object sender, EventArgs e)

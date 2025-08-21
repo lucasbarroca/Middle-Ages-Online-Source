@@ -89,6 +89,11 @@ namespace Intersect.Editor.Forms.Editors
             lblRarity = new Label();
             nudPrice = new DarkNumericUpDown();
             chkCanDrop = new DarkCheckBox();
+            chkPlaceable = new DarkCheckBox();
+            lblPlacedSprite = new Label();
+            cmbPlacedSprite = new DarkComboBox();
+            lblPlacedAnimation = new Label();
+            cmbPlacedAnimation = new DarkComboBox();
             cmbAnimation = new DarkComboBox();
             lblDesc = new Label();
             txtDesc = new DarkTextBox();
@@ -414,6 +419,11 @@ namespace Intersect.Editor.Forms.Editors
             grpGeneral.Controls.Add(lblRarity);
             grpGeneral.Controls.Add(nudPrice);
             grpGeneral.Controls.Add(chkCanDrop);
+            grpGeneral.Controls.Add(chkPlaceable);
+            grpGeneral.Controls.Add(lblPlacedSprite);
+            grpGeneral.Controls.Add(cmbPlacedSprite);
+            grpGeneral.Controls.Add(lblPlacedAnimation);
+            grpGeneral.Controls.Add(cmbPlacedAnimation);
             grpGeneral.Controls.Add(cmbAnimation);
             grpGeneral.Controls.Add(lblDesc);
             grpGeneral.Controls.Add(txtDesc);
@@ -1053,7 +1063,7 @@ namespace Intersect.Editor.Forms.Editors
             nudPrice.ValueChanged += nudPrice_ValueChanged;
             // 
             // chkCanDrop
-            // 
+            //
             chkCanDrop.AutoSize = true;
             chkCanDrop.Location = new System.Drawing.Point(27, 359);
             chkCanDrop.Margin = new Padding(4, 3, 4, 3);
@@ -1062,9 +1072,86 @@ namespace Intersect.Editor.Forms.Editors
             chkCanDrop.TabIndex = 26;
             chkCanDrop.Text = "Can Drop?";
             chkCanDrop.CheckedChanged += chkBound_CheckedChanged;
-            // 
+            //
+            // chkPlaceable
+            //
+            chkPlaceable.AutoSize = true;
+            chkPlaceable.Location = new System.Drawing.Point(321, 246);
+            chkPlaceable.Margin = new Padding(4, 3, 4, 3);
+            chkPlaceable.Name = "chkPlaceable";
+            chkPlaceable.Size = new Size(85, 19);
+            chkPlaceable.TabIndex = 27;
+            chkPlaceable.Text = "Placeable?";
+            chkPlaceable.CheckedChanged += chkPlaceable_CheckedChanged;
+            //
+            // lblPlacedSprite
+            //
+            lblPlacedSprite.AutoSize = true;
+            lblPlacedSprite.Location = new System.Drawing.Point(317, 276);
+            lblPlacedSprite.Margin = new Padding(4, 0, 4, 0);
+            lblPlacedSprite.Name = "lblPlacedSprite";
+            lblPlacedSprite.Size = new Size(82, 15);
+            lblPlacedSprite.TabIndex = 28;
+            lblPlacedSprite.Text = "Placed Sprite:";
+            //
+            // cmbPlacedSprite
+            //
+            cmbPlacedSprite.BackColor = System.Drawing.Color.FromArgb(69, 73, 74);
+            cmbPlacedSprite.BorderColor = System.Drawing.Color.FromArgb(90, 90, 90);
+            cmbPlacedSprite.BorderStyle = ButtonBorderStyle.Solid;
+            cmbPlacedSprite.ButtonColor = System.Drawing.Color.FromArgb(43, 43, 43);
+            cmbPlacedSprite.DrawDropdownHoverOutline = false;
+            cmbPlacedSprite.DrawFocusRectangle = false;
+            cmbPlacedSprite.DrawMode = DrawMode.OwnerDrawFixed;
+            cmbPlacedSprite.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPlacedSprite.FlatStyle = FlatStyle.Flat;
+            cmbPlacedSprite.ForeColor = System.Drawing.Color.Gainsboro;
+            cmbPlacedSprite.FormattingEnabled = true;
+            cmbPlacedSprite.Items.AddRange(new object[] { "None" });
+            cmbPlacedSprite.Location = new System.Drawing.Point(321, 295);
+            cmbPlacedSprite.Margin = new Padding(4, 3, 4, 3);
+            cmbPlacedSprite.Name = "cmbPlacedSprite";
+            cmbPlacedSprite.Size = new Size(252, 24);
+            cmbPlacedSprite.TabIndex = 29;
+            cmbPlacedSprite.Text = "None";
+            cmbPlacedSprite.TextPadding = new Padding(2);
+            cmbPlacedSprite.SelectedIndexChanged += cmbPlacedSprite_SelectedIndexChanged;
+            //
+            // lblPlacedAnimation
+            //
+            lblPlacedAnimation.AutoSize = true;
+            lblPlacedAnimation.Location = new System.Drawing.Point(317, 324);
+            lblPlacedAnimation.Margin = new Padding(4, 0, 4, 0);
+            lblPlacedAnimation.Name = "lblPlacedAnimation";
+            lblPlacedAnimation.Size = new Size(112, 15);
+            lblPlacedAnimation.TabIndex = 30;
+            lblPlacedAnimation.Text = "Placed Animation:";
+            //
+            // cmbPlacedAnimation
+            //
+            cmbPlacedAnimation.BackColor = System.Drawing.Color.FromArgb(69, 73, 74);
+            cmbPlacedAnimation.BorderColor = System.Drawing.Color.FromArgb(90, 90, 90);
+            cmbPlacedAnimation.BorderStyle = ButtonBorderStyle.Solid;
+            cmbPlacedAnimation.ButtonColor = System.Drawing.Color.FromArgb(43, 43, 43);
+            cmbPlacedAnimation.DrawDropdownHoverOutline = false;
+            cmbPlacedAnimation.DrawFocusRectangle = false;
+            cmbPlacedAnimation.DrawMode = DrawMode.OwnerDrawFixed;
+            cmbPlacedAnimation.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPlacedAnimation.FlatStyle = FlatStyle.Flat;
+            cmbPlacedAnimation.ForeColor = System.Drawing.Color.Gainsboro;
+            cmbPlacedAnimation.FormattingEnabled = true;
+            cmbPlacedAnimation.Items.AddRange(new object[] { "None" });
+            cmbPlacedAnimation.Location = new System.Drawing.Point(321, 343);
+            cmbPlacedAnimation.Margin = new Padding(4, 3, 4, 3);
+            cmbPlacedAnimation.Name = "cmbPlacedAnimation";
+            cmbPlacedAnimation.Size = new Size(252, 24);
+            cmbPlacedAnimation.TabIndex = 31;
+            cmbPlacedAnimation.Text = "None";
+            cmbPlacedAnimation.TextPadding = new Padding(2);
+            cmbPlacedAnimation.SelectedIndexChanged += cmbPlacedAnimation_SelectedIndexChanged;
+            //
             // cmbAnimation
-            // 
+            //
             cmbAnimation.BackColor = System.Drawing.Color.FromArgb(69, 73, 74);
             cmbAnimation.BorderColor = System.Drawing.Color.FromArgb(90, 90, 90);
             cmbAnimation.BorderStyle = ButtonBorderStyle.Solid;
@@ -3153,6 +3240,11 @@ namespace Intersect.Editor.Forms.Editors
         private DarkNumericUpDown nudDamage;
         private DarkCheckBox chkStackable;
         private DarkCheckBox chkCanDrop;
+        private DarkCheckBox chkPlaceable;
+        private Label lblPlacedSprite;
+        private DarkComboBox cmbPlacedSprite;
+        private Label lblPlacedAnimation;
+        private DarkComboBox cmbPlacedAnimation;
         private DarkGroupBox grpVitalBonuses;
         private DarkNumericUpDown nudManaBonus;
         private DarkNumericUpDown nudHealthBonus;

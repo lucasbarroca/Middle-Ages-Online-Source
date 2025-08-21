@@ -189,6 +189,11 @@ namespace Intersect.Client.Networking
             Network.SendPacket(new DropItemPacket(slot, amount));
         }
 
+        public static void SendPlaceItem(int slot)
+        {
+            Network.SendPacket(new PlaceItemPacket(slot));
+        }
+
         public static void SendUseItem(int slot, Guid targetId)
         {
             Network.SendPacket(new UseItemPacket(slot, targetId));
