@@ -1712,6 +1712,18 @@ namespace Intersect.Server.Networking
             player?.DropItemFrom(packet.Slot, packet.Quantity);
         }
 
+        //PlaceItemPacket
+        public void HandlePacket(Client client, PlaceItemPacket packet)
+        {
+            var player = client?.Entity;
+            if (packet == null)
+            {
+                return;
+            }
+
+            player?.TryPlaceItemFrom(packet.Slot);
+        }
+
         //UseItemPacket
         public void HandlePacket(Client client, UseItemPacket packet)
         {

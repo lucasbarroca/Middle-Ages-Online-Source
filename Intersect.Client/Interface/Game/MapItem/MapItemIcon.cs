@@ -114,7 +114,15 @@ namespace Intersect.Client.Interface.Game.Inventory
             var item = ItemBase.Get(MyItem.ItemId);
             if (item != null)
             {
-                var itemTex = Globals.ContentManager.GetTexture(Framework.Content.TextureType.Item, item.Icon);
+                var textureName = item.Icon;
+                var textureType = Framework.Content.TextureType.Item;
+                if (MyItem.Placed && item.Placeable && !string.IsNullOrEmpty(item.PlacedSprite))
+                {
+                    textureName = item.PlacedSprite;
+                    textureType = Framework.Content.TextureType.Item;
+                }
+
+                var itemTex = Globals.ContentManager.GetTexture(textureType, textureName);
                 if (itemTex != null)
                 {
                     Pnl.RenderColor = item.Color;

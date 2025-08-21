@@ -1215,7 +1215,7 @@ namespace Intersect.Client.Networking
             map.MapItems.Clear();
             foreach(var item in packet.Items)
             {
-                var mapItem = new MapItemInstance(item.TileIndex,item.Id, item.ItemId, item.BagId, item.Quantity, item.Properties);
+                var mapItem = new MapItemInstance(item.TileIndex,item.Id, item.ItemId, item.BagId, item.Quantity, item.Properties, item.Placed);
                 
                 if (!map.MapItems.ContainsKey(mapItem.TileIndex))
                 {
@@ -1256,7 +1256,7 @@ namespace Intersect.Client.Networking
                 }
 
                 // Check if the item already exists, if it does replace it. Otherwise just add it.
-                var mapItem = new MapItemInstance(packet.TileIndex, packet.Id, packet.ItemId, packet.BagId, packet.Quantity, packet.Properties);
+                var mapItem = new MapItemInstance(packet.TileIndex, packet.Id, packet.ItemId, packet.BagId, packet.Quantity, packet.Properties, packet.Placed);
                 if (map.MapItems[packet.TileIndex].Any(item => item.Id == mapItem.Id))
                 {
                     for (var index = 0; index < map.MapItems[packet.TileIndex].Count; index++)

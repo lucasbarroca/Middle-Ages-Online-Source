@@ -44,6 +44,7 @@ namespace Intersect.Client.Framework.Entities
         long GetItemRemainingCooldown(int slot);
         bool IsItemOnCooldown(int slot);
         void TryDropItem(int index);
+        void TryPlaceItem(int index);
         void TryUseItem(int index);
         void SwapSpells(int spell1, int spell2);
         long GetSpellCooldown(Guid id);

@@ -20,11 +20,13 @@ namespace Intersect.Client.Items
 
         [JsonIgnore] public int TileIndex => Y * Options.MapWidth + X;
 
+        public bool Placed { get; set; }
+
         public MapItemInstance() : base()
         {
         }
 
-        public MapItemInstance(int tileIndex, Guid uniqueId, Guid itemId, Guid? bagId, int quantity, ItemProperties itemProperties) : base()
+        public MapItemInstance(int tileIndex, Guid uniqueId, Guid itemId, Guid? bagId, int quantity, ItemProperties itemProperties, bool placed) : base()
         {
             Id = uniqueId;
             X = tileIndex % Options.MapWidth;
@@ -33,6 +35,7 @@ namespace Intersect.Client.Items
             BagId = bagId;
             Quantity = quantity;
             ItemProperties = itemProperties;
+            Placed = placed;
         }
 
     }

@@ -240,6 +240,7 @@ namespace Intersect.Server.Maps
             SpawnMapNpcs();
             SpawnAttributeItems(); // This must be done before spawning items or resources
             SpawnMapResources();
+            SpawnPlacedItems();
             RefreshEventsCache();
             SpawnGlobalEvents();
         }
@@ -955,6 +956,34 @@ namespace Intersect.Server.Maps
                     }
                 }
             }
+        }
+
+        private void SpawnPlacedItems()
+        {
+            foreach (var placed in mMapController.PlacedItems)
+            {
+                var mapItem = new MapItem(placed.ItemId, placed.Quantity, placed.X, placed.Y, placed.BagId, null)
+                {
+                    Placed = true,
+                    VisibleToAll = true,
+                    DespawnTime = -1,
+                };
+                mapItem.Properties = new ItemProperties(placed.Properties);
+                AddItem(mapItem);
+            }
+        }
+
+        public void PlaceItem(int x, int y, Item item)
+        {
+            var mapItem = new MapItem(item.ItemId, item.Quantity, x, y, item.BagId, item.Bag)
+            {
+                Placed = true,
+                VisibleToAll = true,
+                DespawnTime = -1,
+            };
+            mapItem.SetupStatBuffs(item);
+            AddItem(mapItem);
+            PacketSender.SendMapItemUpdate(mMapController.Id, MapInstanceId, mapItem, false);
         }
         #endregion
 

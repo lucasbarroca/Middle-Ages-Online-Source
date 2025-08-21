@@ -391,6 +391,33 @@ namespace Intersect.Server.Maps
             DbInterface.SaveGameObject(this);
         }
 
+        public void CapturePlacedItems()
+        {
+            if (!mInstances.TryGetValue(MapInstance.OverworldInstanceId, out var mapInstance))
+            {
+                return;
+            }
+
+            PlacedItems.Clear();
+            foreach (var item in mapInstance.AllMapItems.Values)
+            {
+                if (!item.Placed)
+                {
+                    continue;
+                }
+
+                PlacedItems.Add(new PlacedMapItem
+                {
+                    ItemId = item.ItemId,
+                    BagId = item.BagId,
+                    Quantity = item.Quantity,
+                    X = item.X,
+                    Y = item.Y,
+                    Properties = new ItemProperties(item.Properties)
+                });
+            }
+        }
+
         #region Map Instance Management
         /// <summary>
         /// Despawns all entities/items/projectiles on each instance that belongs to this controller
