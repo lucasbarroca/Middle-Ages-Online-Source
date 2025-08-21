@@ -277,6 +277,26 @@ namespace Intersect.GameObjects.Maps
         [JsonProperty]
         public List<NpcSpawn> Spawns { get; private set; } = new List<NpcSpawn>();
 
+        [Column("PlacedItems")]
+        [JsonIgnore]
+        public string PlacedItemsJson
+        {
+            get => JsonConvert.SerializeObject(PlacedItems);
+            set
+            {
+                PlacedItems.Clear();
+                var items = JsonConvert.DeserializeObject<List<PlacedMapItem>>(value ?? string.Empty);
+                if (items != null)
+                {
+                    PlacedItems.AddRange(items);
+                }
+            }
+        }
+
+        [NotMapped]
+        [JsonProperty]
+        public List<PlacedMapItem> PlacedItems { get; private set; } = new List<PlacedMapItem>();
+
         //Properties
         public string Music { get; set; } = null;
 

@@ -37,6 +37,8 @@ namespace Intersect.Server.Maps
         // We need this mostly for the client-side.. They can't keep track of our timer after all!
         public bool VisibleToAll = true;
 
+        public bool Placed { get; set; }
+
         public MapItem(Guid itemId, int quantity, int x, int y, long respawnTime = 0) : base(itemId, quantity)
         {
             UniqueId = Guid.NewGuid();
