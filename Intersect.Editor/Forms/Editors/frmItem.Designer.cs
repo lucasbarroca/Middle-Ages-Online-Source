@@ -62,11 +62,6 @@ namespace Intersect.Editor.Forms.Editors
             nudItemDespawnTime = new DarkNumericUpDown();
             lblDespawnTime = new Label();
             cmbEquipmentAnimation = new DarkComboBox();
-            chkPlaceable = new DarkCheckBox();
-            lblPlacedSprite = new Label();
-            cmbPlacedSprite = new DarkComboBox();
-            lblPlacedAnimation = new Label();
-            cmbPlacedAnimation = new DarkComboBox();
             grpRequirements = new DarkGroupBox();
             lblCannotUse = new Label();
             txtCannotUse = new DarkTextBox();
@@ -395,11 +390,6 @@ namespace Intersect.Editor.Forms.Editors
             grpGeneral.Controls.Add(nudItemDespawnTime);
             grpGeneral.Controls.Add(lblDespawnTime);
             grpGeneral.Controls.Add(cmbEquipmentAnimation);
-            grpGeneral.Controls.Add(cmbPlacedAnimation);
-            grpGeneral.Controls.Add(lblPlacedAnimation);
-            grpGeneral.Controls.Add(cmbPlacedSprite);
-            grpGeneral.Controls.Add(lblPlacedSprite);
-            grpGeneral.Controls.Add(chkPlaceable);
             grpGeneral.Controls.Add(grpRequirements);
             grpGeneral.Controls.Add(chkCanGuildBank);
             grpGeneral.Controls.Add(lblEquipmentAnimation);
@@ -743,86 +733,9 @@ namespace Intersect.Editor.Forms.Editors
             cmbEquipmentAnimation.Text = "None";
             cmbEquipmentAnimation.TextPadding = new Padding(2);
             cmbEquipmentAnimation.SelectedIndexChanged += cmbEquipmentAnimation_SelectedIndexChanged;
-            //
-            // chkPlaceable
-            //
-            chkPlaceable.AutoSize = true;
-            chkPlaceable.Location = new System.Drawing.Point(27, 530);
-            chkPlaceable.Margin = new Padding(4, 3, 4, 3);
-            chkPlaceable.Name = "chkPlaceable";
-            chkPlaceable.Size = new Size(79, 19);
-            chkPlaceable.TabIndex = 103;
-            chkPlaceable.Text = "Placeable";
-            chkPlaceable.CheckedChanged += chkPlaceable_CheckedChanged;
-            //
-            // lblPlacedSprite
-            //
-            lblPlacedSprite.AutoSize = true;
-            lblPlacedSprite.Location = new System.Drawing.Point(9, 558);
-            lblPlacedSprite.Margin = new Padding(4, 0, 4, 0);
-            lblPlacedSprite.Name = "lblPlacedSprite";
-            lblPlacedSprite.Size = new Size(82, 15);
-            lblPlacedSprite.TabIndex = 104;
-            lblPlacedSprite.Text = "Placed Sprite:";
-            //
-            // cmbPlacedSprite
-            //
-            cmbPlacedSprite.BackColor = System.Drawing.Color.FromArgb(69, 73, 74);
-            cmbPlacedSprite.BorderColor = System.Drawing.Color.FromArgb(90, 90, 90);
-            cmbPlacedSprite.BorderStyle = ButtonBorderStyle.Solid;
-            cmbPlacedSprite.ButtonColor = System.Drawing.Color.FromArgb(43, 43, 43);
-            cmbPlacedSprite.DrawDropdownHoverOutline = false;
-            cmbPlacedSprite.DrawFocusRectangle = false;
-            cmbPlacedSprite.DrawMode = DrawMode.OwnerDrawFixed;
-            cmbPlacedSprite.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbPlacedSprite.FlatStyle = FlatStyle.Flat;
-            cmbPlacedSprite.ForeColor = System.Drawing.Color.Gainsboro;
-            cmbPlacedSprite.FormattingEnabled = true;
-            cmbPlacedSprite.Items.AddRange(new object[] { "None" });
-            cmbPlacedSprite.Location = new System.Drawing.Point(175, 553);
-            cmbPlacedSprite.Margin = new Padding(4, 3, 4, 3);
-            cmbPlacedSprite.Name = "cmbPlacedSprite";
-            cmbPlacedSprite.Size = new Size(271, 24);
-            cmbPlacedSprite.TabIndex = 105;
-            cmbPlacedSprite.Text = "None";
-            cmbPlacedSprite.TextPadding = new Padding(2);
-            cmbPlacedSprite.SelectedIndexChanged += cmbPlacedSprite_SelectedIndexChanged;
-            //
-            // lblPlacedAnimation
-            //
-            lblPlacedAnimation.AutoSize = true;
-            lblPlacedAnimation.Location = new System.Drawing.Point(9, 587);
-            lblPlacedAnimation.Margin = new Padding(4, 0, 4, 0);
-            lblPlacedAnimation.Name = "lblPlacedAnimation";
-            lblPlacedAnimation.Size = new Size(101, 15);
-            lblPlacedAnimation.TabIndex = 106;
-            lblPlacedAnimation.Text = "Placed Animation:";
-            //
-            // cmbPlacedAnimation
-            //
-            cmbPlacedAnimation.BackColor = System.Drawing.Color.FromArgb(69, 73, 74);
-            cmbPlacedAnimation.BorderColor = System.Drawing.Color.FromArgb(90, 90, 90);
-            cmbPlacedAnimation.BorderStyle = ButtonBorderStyle.Solid;
-            cmbPlacedAnimation.ButtonColor = System.Drawing.Color.FromArgb(43, 43, 43);
-            cmbPlacedAnimation.DrawDropdownHoverOutline = false;
-            cmbPlacedAnimation.DrawFocusRectangle = false;
-            cmbPlacedAnimation.DrawMode = DrawMode.OwnerDrawFixed;
-            cmbPlacedAnimation.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbPlacedAnimation.FlatStyle = FlatStyle.Flat;
-            cmbPlacedAnimation.ForeColor = System.Drawing.Color.Gainsboro;
-            cmbPlacedAnimation.FormattingEnabled = true;
-            cmbPlacedAnimation.Items.AddRange(new object[] { "None" });
-            cmbPlacedAnimation.Location = new System.Drawing.Point(175, 582);
-            cmbPlacedAnimation.Margin = new Padding(4, 3, 4, 3);
-            cmbPlacedAnimation.Name = "cmbPlacedAnimation";
-            cmbPlacedAnimation.Size = new Size(271, 24);
-            cmbPlacedAnimation.TabIndex = 107;
-            cmbPlacedAnimation.Text = "None";
-            cmbPlacedAnimation.TextPadding = new Padding(2);
-            cmbPlacedAnimation.SelectedIndexChanged += cmbPlacedAnimation_SelectedIndexChanged;
-            //
+            // 
             // grpRequirements
-            //
+            // 
             grpRequirements.BackColor = System.Drawing.Color.FromArgb(45, 45, 48);
             grpRequirements.BorderColor = System.Drawing.Color.FromArgb(90, 90, 90);
             grpRequirements.Controls.Add(lblCannotUse);
@@ -3337,11 +3250,6 @@ namespace Intersect.Editor.Forms.Editors
         private DarkComboBox cmbWeaponSprite;
         private DarkNumericUpDown nudItemDespawnTime;
         private Label lblDespawnTime;
-        private DarkCheckBox chkPlaceable;
-        private Label lblPlacedSprite;
-        private DarkComboBox cmbPlacedSprite;
-        private Label lblPlacedAnimation;
-        private DarkComboBox cmbPlacedAnimation;
         private ToolTip tooltips;
         private DarkGroupBox grpEffects;
         private ListBox lstBonusEffects;
