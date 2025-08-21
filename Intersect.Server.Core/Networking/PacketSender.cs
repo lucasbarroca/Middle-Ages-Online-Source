@@ -1094,7 +1094,7 @@ namespace Intersect.Server.Networking
                 {
                     if (item.VisibleToAll || item.Owner == player?.Id)
                     {
-                        items.Add(new MapItemUpdatePacket(mapId, item.TileIndex, item.UniqueId, item.ItemId, item.BagId, item.Quantity, item.Properties));
+                        items.Add(new MapItemUpdatePacket(mapId, item.TileIndex, item.UniqueId, item.ItemId, item.BagId, item.Quantity, item.Properties, item.Placed));
                     }
                 }
             }
@@ -1160,12 +1160,12 @@ namespace Intersect.Server.Networking
                     var player = Player.FindOnline(itemRef.Owner);
                     if (player != null)
                     {
-                        player.SendPacket(new MapItemUpdatePacket(mapId, itemRef.TileIndex, itemRef.UniqueId, itemRef.ItemId, itemRef.BagId, itemRef.Quantity, itemRef.Properties));
+                        player.SendPacket(new MapItemUpdatePacket(mapId, itemRef.TileIndex, itemRef.UniqueId, itemRef.ItemId, itemRef.BagId, itemRef.Quantity, itemRef.Properties, itemRef.Placed));
                     }
                 }
                 else
                 {
-                    SendDataToProximityOnMapInstance(mapId, mapInstanceId, new MapItemUpdatePacket(mapId, itemRef.TileIndex, itemRef.UniqueId, itemRef.ItemId, itemRef.BagId, itemRef.Quantity, itemRef.Properties));
+                    SendDataToProximityOnMapInstance(mapId, mapInstanceId, new MapItemUpdatePacket(mapId, itemRef.TileIndex, itemRef.UniqueId, itemRef.ItemId, itemRef.BagId, itemRef.Quantity, itemRef.Properties, itemRef.Placed));
                 }
             }
         }

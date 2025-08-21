@@ -412,6 +412,16 @@ namespace Intersect.Server.Migrations.Sqlite.Game
                     b.Property<string>("Icon")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("Placeable")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("PlacedAnimationId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("PlacedAnimation");
+
+                    b.Property<string>("PlacedSprite")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("IgnoreCooldownReduction")
                         .HasColumnType("INTEGER");
 
@@ -1191,6 +1201,10 @@ namespace Intersect.Server.Migrations.Sqlite.Game
                     b.Property<string>("NpcSpawnsJson")
                         .HasColumnType("TEXT")
                         .HasColumnName("NpcSpawns");
+
+                    b.Property<string>("PlacedItemsJson")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("PlacedItems");
 
                     b.Property<string>("OverlayGraphic")
                         .HasColumnType("TEXT");
