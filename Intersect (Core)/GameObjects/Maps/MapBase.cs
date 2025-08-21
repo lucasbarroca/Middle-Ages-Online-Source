@@ -293,6 +293,8 @@ namespace Intersect.GameObjects.Maps
             }
         }
 
+        [NotMapped]
+        [JsonProperty]
         public List<PlacedMapItem> PlacedItems { get; private set; } = new List<PlacedMapItem>();
 
         //Properties

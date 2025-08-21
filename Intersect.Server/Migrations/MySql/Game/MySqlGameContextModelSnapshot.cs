@@ -427,6 +427,17 @@ namespace Intersect.Server.Migrations.MySql.Game
                     b.Property<string>("Icon")
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("Placeable")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<Guid>("PlacedAnimationId")
+                        .HasColumnType("char(36)")
+                        .HasColumnName("PlacedAnimation")
+                        .UseCollation("ascii_general_ci");
+
+                    b.Property<string>("PlacedSprite")
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("IgnoreCooldownReduction")
                         .HasColumnType("tinyint(1)");
 
@@ -1236,6 +1247,10 @@ namespace Intersect.Server.Migrations.MySql.Game
                     b.Property<string>("NpcSpawnsJson")
                         .HasColumnType("longtext")
                         .HasColumnName("NpcSpawns");
+
+                    b.Property<string>("PlacedItemsJson")
+                        .HasColumnType("longtext")
+                        .HasColumnName("PlacedItems");
 
                     b.Property<string>("OverlayGraphic")
                         .HasColumnType("longtext");
